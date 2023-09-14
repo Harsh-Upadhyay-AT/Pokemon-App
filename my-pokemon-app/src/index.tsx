@@ -4,13 +4,17 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import AppRoutes from './Routing/AppRoutes';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
+     <Provider store={store}>
     <AppRoutes/>
+     </Provider>
   </React.StrictMode>
 );
 

@@ -1,29 +1,31 @@
-import { Link, Outlet} from "react-router-dom"
-import { Strings } from "../Resource/Strings"
-
+import { Link, Outlet } from "react-router-dom";
+import { Strings } from "../Resource/Strings";
+import "./Layout.css"; 
 
 const Layout = () => {
-    return (
-        <>
-        <div>
-        <h1 style={{textAlign: "center"}}>{Strings.Pokemon}</h1>
-        </div>
-        <div>
-        <ul style={{ display: "flex", listStyle: "none", gap: "20px" ,backgroundColor:"lightgrey",height:"40px"}}>
-        <li>
+  return (
+    <>
+      <div className="header">
+        <h1>{Strings.Pokemon}</h1>
+      </div>
+      <div className="navbar">
+        <ul>
+          <li>
             <Link to={"/"}>{Strings.home}</Link>
-        </li>
-        <li>
+          </li>
+          <li>
             <Link to={"/pokemon/list"}>{Strings.pokemonList}</Link>
-        </li>
-        <li>
+          </li>
+          <li>
             <Link to={"/my/pokemon/list"}>{Strings.myPokemonList}</Link>
-        </li>
+          </li>
         </ul>
-        </div>
+      </div>
+      <div className="container main-content">
         <Outlet />
-        </>
-    )
-}
+      </div>
+    </>
+  );
+};
 
-export default Layout
+export default Layout;
