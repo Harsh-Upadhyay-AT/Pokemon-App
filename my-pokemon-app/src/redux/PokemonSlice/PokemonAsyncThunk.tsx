@@ -2,14 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import constant from "../../config/constant/constant"
 import { getAllDetails, getPokemonDetails } from "../../Service/PokemonService"
 
-export interface GetPokemonList {
-    id:number
-    page:number
-    limit:number
+export interface GetPokemonList{
+    id: number
+    offset: number
+    limit: number
 }
 
-export interface GetImageList {
-    id:number
+export interface GetImageList{
+    id: number
 }
 
 export const getAllDetailsAction = createAsyncThunk(
@@ -31,8 +31,6 @@ export const getAllDetailsAction = createAsyncThunk(
         }
     }
 )
-
-
 export const getPokemonDetailsAction = createAsyncThunk(
     "pokemonDetails/getPokemonDetailsAction",
     async(payload: GetImageList,{dispatch, getState})=>{

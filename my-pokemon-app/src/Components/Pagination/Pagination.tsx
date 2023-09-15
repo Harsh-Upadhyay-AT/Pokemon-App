@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Strings } from "../../Resource/Strings";
 
 interface PaginationProps {
   page: number;
@@ -27,7 +28,7 @@ const Pagination:FC<PaginationProps> = ({
     const buttons = [];
     for (let i = 0; i <= totalPages-1; i++) {
       const ButtonClass = i === page ? "active" : "";
-      if(i<= 5){
+      if(i<= 9){
         buttons.push(
           <button
             key={i}
@@ -37,7 +38,7 @@ const Pagination:FC<PaginationProps> = ({
             {i+1}
           </button>
         );
-      }else if (totalPages-5 <= i){
+      }else if (totalPages-1 <= i){
         buttons.push(
           <button
             key={i}
@@ -57,11 +58,11 @@ const Pagination:FC<PaginationProps> = ({
       <span>{`Page ${page} of ${totalPages}:`}</span>
       <>
         <button onClick={handlePreviousPage} disabled={page === 1}>
-          prev
+          {Strings.prev}
         </button>
         {renderPageButtons()}
         <button onClick={handleNextPage} disabled={page === totalPages}>
-          next
+          {Strings.next}
         </button>
       </>
     </div>

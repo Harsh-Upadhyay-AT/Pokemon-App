@@ -1,5 +1,5 @@
 const constant = {
-    page : {
+    offset : {
         defaultNumber: 1,
         size: 10,
         defaultTotal: 0,

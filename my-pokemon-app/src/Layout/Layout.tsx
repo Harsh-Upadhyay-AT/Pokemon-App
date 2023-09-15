@@ -9,7 +9,6 @@ const Layout = () => {
         <h1>{Strings.Pokemon}</h1>
       </div>
       <div className="navbar">
-        <ul>
           <li>
             <Link to={"/"}>{Strings.home}</Link>
           </li>
@@ -19,7 +18,7 @@ const Layout = () => {
           <li>
             <Link to={"/my/pokemon/list"}>{Strings.myPokemonList}</Link>
           </li>
-        </ul>
+        
       </div>
       <div className="container main-content">
         <Outlet />

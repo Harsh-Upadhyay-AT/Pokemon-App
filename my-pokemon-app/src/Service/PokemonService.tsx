@@ -5,15 +5,14 @@ import { hasError, hasSuccess } from "./ApiHepler";
 import { appClient } from "./networkService";
 
 export async function getAllDetails(payload: GetPokemonList) {
-    try {
-        const response = await appClient.get(api.endPoint.pokemon + "?page=" + payload.page + "&limit=" + payload.limit);
+    try{
+        const response = await appClient.get(api.endPoint.pokemon + "?offset=" + payload.offset + "&limit=" + payload.limit);
         return hasSuccess(response?.data)
     }
-    catch(error){
+    catch(error) {
         return hasError(error)
     }
 }
-
 export async function getPokemonDetails(payload: GetImageList) {
 
     try{
@@ -24,7 +23,6 @@ export async function getPokemonDetails(payload: GetImageList) {
         return hasError(error)
     }
 }
-
 export async function getAbilityDetails(payload: GetAbilityList) {
     try{
         const response = await appClient.get(api.endPoint.ability + payload.id);

@@ -6,7 +6,7 @@ import {
 } from "./PokemonAsyncThunk";
 import { PokemonList } from "./PokemonType";
 
-const initialPokemonImage = {
+const initialImage = {
   back_default: "",
   back_shiny: "",
   front_default: "",
@@ -15,33 +15,35 @@ const initialPokemonImage = {
   url: "",
   id: 1,
   weight: 1,
-  height: 1,
-  order: 1,
+  height:1,
+  order:1
 };
 
 const initialState: PokemonList = {
   list: [],
   isLoading: false,
-  imagePokemonList: initialPokemonImage,
+  imagePokemonList: initialImage,
   id: 1,
-  page: constant.page.defaultNumber,
-  limit: constant.page.size,
-  total: constant.page.defaultTotal,
+  offset: constant.offset.defaultNumber,
+  limit: constant.offset.size,
+  total: constant.offset.defaultTotal,
   weight: 1,
   height: 1,
   name: "",
-  order: 1,
+  order: 1
 };
-
 const pokemonSlice = createSlice({
-  name: "pokemon",
+  name: "Pokemon",
   initialState,
   reducers: {
     increase: (state, action) => {
       state.id = action.payload;
     },
+    setCurrentPageSize: (state, action) => {
+      state.limit = action.payload;
+    },
     setCurrentPage: (state, action) => {
-      state.page = action.payload;
+      state.offset = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -78,10 +80,10 @@ const pokemonSlice = createSlice({
               weight,
               height,
               name,
-              order,
+              order
             };
           } else {
-            state.imagePokemonList = initialPokemonImage;
+            state.imagePokemonList = initialImage;
           }
           state.isLoading = false;
         }
@@ -91,6 +93,5 @@ const pokemonSlice = createSlice({
       });
   },
 });
-
 export const pokemonReducer = pokemonSlice.reducer;
 export const pokemonAction = pokemonSlice.actions;

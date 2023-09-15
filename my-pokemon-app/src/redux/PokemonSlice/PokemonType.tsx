@@ -5,7 +5,7 @@ export interface Pokemon{
     game_index: number;
     is_hidden: boolean;
     height: number;
-
+    
 }
 export interface ImagePokemon{
     back_default: string;
@@ -25,7 +25,7 @@ export interface PokemonList{
     imagePokemonList: ImagePokemon
     isLoading: boolean;
     id: number;
-    page: number;
+    offset: number;
     limit: number;
     total: number;
     weight: number;
