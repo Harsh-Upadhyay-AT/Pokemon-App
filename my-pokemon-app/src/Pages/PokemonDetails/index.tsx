@@ -5,9 +5,11 @@ import Swal, { SweetAlertOptions } from "sweetalert2";
 import { Strings } from "../../Resource/Strings";
 import { IRootState, useAppDispatch } from "redux/store";
 import { getAbilityDetailsAction } from "redux/PokemonDetailSlice/PokemonDetailAsyncThunk";
-import { getAllDetailsAction, getPokemonDetailsAction } from "redux/PokemonSlice/PokemonAsyncThunk";
+import {
+  getAllDetailsAction,
+  getPokemonDetailsAction,
+} from "redux/PokemonSlice/PokemonAsyncThunk";
 import { getItem, setItem } from "Components/Storage";
-
 
 export const CATCH_NAME = "CATCH_NAME";
 const PokemonDetails = () => {

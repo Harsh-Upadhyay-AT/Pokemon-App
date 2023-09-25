@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 
-interface PopupMessageProps{
-    message: string;
+interface PopupMessageProps {
+  message: string;
 }
 
-const PopupMessage:FC<PopupMessageProps> = ({ message }) => {
+const PopupMessage: FC<PopupMessageProps> = ({ message }) => {
   return (
     <div className="popup">
       <div className="popup-content">

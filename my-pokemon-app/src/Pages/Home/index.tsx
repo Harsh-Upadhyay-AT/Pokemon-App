@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import "./index.css";
-import React from 'react';
+import React from "react";
 import { Strings } from "Resource/Strings";
-
 
 const Welcome: React.FC = () => {
   return (

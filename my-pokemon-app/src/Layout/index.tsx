@@ -9,15 +9,15 @@ const Layout = () => {
         <h1>{Strings.Pokemon}</h1>
       </div>
       <div className="navbar">
-          <li>
-            <Link to={"/"}>{Strings.home}</Link>
-          </li>
-          <li>
-            <Link to={"/pokemon/list"}>{Strings.pokemonList}</Link>
-          </li>
-          <li>
-            <Link to={"/my/pokemon/list"}>{Strings.myPokemonList}</Link>
-          </li>
+        <li>
+          <Link to={"/"}>{Strings.home}</Link>
+        </li>
+        <li>
+          <Link to={"/pokemon/list"}>{Strings.pokemonList}</Link>
+        </li>
+        <li>
+          <Link to={"/my/pokemon/list"}>{Strings.myPokemonList}</Link>
+        </li>
       </div>
       <div className="container main-content">
         <Outlet />

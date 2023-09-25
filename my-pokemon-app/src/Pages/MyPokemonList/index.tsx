@@ -4,7 +4,6 @@ import { getItem, setItem } from "Components/Storage";
 import { CATCH_NAME } from "Pages/PokemonDetails";
 import { Strings } from "Resource/Strings";
 
-
 interface MyPokemonListProps {
   name: string;
   image: string;
@@ -12,35 +11,41 @@ interface MyPokemonListProps {
 }
 
 const MyPokemonList: FC = () => {
-  const [parsedData, setParsedData] = useState<MyPokemonListProps[] | null>(null);
+  const [parsedData, setParsedData] = useState<MyPokemonListProps[] | null>(
+    null
+  );
 
   useEffect(() => {
     const { data } = getItem(CATCH_NAME);
-    const parsedDataFromLocalStorage = JSON.parse(
-      data!
-    );
+    const parsedDataFromLocalStorage = JSON.parse(data!);
     setParsedData(parsedDataFromLocalStorage);
   }, []);
 
   const removeHandler = (index: number) => {
-    const updatedData = [...(parsedData || [])]
+    const updatedData = [...(parsedData || [])];
     updatedData.splice(index, 1);
     setParsedData(updatedData);
     setItem(CATCH_NAME, JSON.stringify(updatedData));
   };
 
   return (
-      <div>
+    <div>
       {parsedData && parsedData.length > 0 ? (
         <div>
           {parsedData.map((items, index) => {
             const imageUrl = `https://img.pokemondb.net/artwork/large/${items.name}.jpg`;
             return (
               <div className="pokemon-item" key={index}>
-                <img className="pokemon-image" src={imageUrl} alt={items.name} />
+                <img
+                  className="pokemon-image"
+                  src={imageUrl}
+                  alt={items.name}
+                />
                 <div className="pokemon-info">
                   <div className="pokemon-name">Name: {items.name}</div>
-                  <div className="pokemon-nickname">Nickname: {items.nickName}</div>
+                  <div className="pokemon-nickname">
+                    Nickname: {items.nickName}
+                  </div>
                 </div>
                 <button
                   className="remove-button"

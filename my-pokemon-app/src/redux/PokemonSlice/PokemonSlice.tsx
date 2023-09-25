@@ -15,8 +15,8 @@ const initialImage = {
   url: "",
   id: 1,
   weight: 1,
-  height:1,
-  order:1
+  height: 1,
+  order: 1,
 };
 
 const initialState: PokemonList = {
@@ -30,7 +30,7 @@ const initialState: PokemonList = {
   weight: 1,
   height: 1,
   name: "",
-  order: 1
+  order: 1,
 };
 const pokemonSlice = createSlice({
   name: "Pokemon",
@@ -43,7 +43,7 @@ const pokemonSlice = createSlice({
       state.limit = action.payload;
     },
     setCurrentPage: (state, action) => {
-      state.offset = action.payload
+      state.offset = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -80,7 +80,7 @@ const pokemonSlice = createSlice({
               weight,
               height,
               name,
-              order
+              order,
             };
           } else {
             state.imagePokemonList = initialImage;
