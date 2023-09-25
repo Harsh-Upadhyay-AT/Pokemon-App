@@ -1,9 +1,10 @@
+import Layout from "Layout"
+import Home from "Pages/Home"
+import MyPokemonList from "Pages/MyPokemonList"
+import PokemonDetails from "Pages/PokemonDetails"
+import PokemonList from "Pages/PokemonList"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Layout from "../Layout"
-import Home from "../Pages/Home"
-import PokemonList from "../Pages/PokemonList"
-import MyPokemonList from "../Pages/MyPokemonList"
-import PokemonDetails from "../Pages/PokemonDetails"
+
 
 
 const AppRoutes=()=>{
