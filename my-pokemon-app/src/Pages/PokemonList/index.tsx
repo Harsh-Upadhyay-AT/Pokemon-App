@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { useSelector } from "react-redux";
 import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";

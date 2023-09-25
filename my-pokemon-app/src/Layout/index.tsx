@@ -1,5 +1,4 @@
 import { Link, Outlet } from "react-router-dom";
-// import "./Layout.css";
 import "./index.css";
 import { Strings } from "Resource/Strings";
 
