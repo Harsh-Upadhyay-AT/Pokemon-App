@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
-import { Strings } from "../Resource/Strings";
-import "./Layout.css"; 
+// import "./Layout.css";
+import "./index.css";
+import { Strings } from "Resource/Strings";
 
 const Layout = () => {
   return (
@@ -18,7 +19,6 @@ const Layout = () => {
           <li>
             <Link to={"/my/pokemon/list"}>{Strings.myPokemonList}</Link>
           </li>
-        
       </div>
       <div className="container main-content">
         <Outlet />

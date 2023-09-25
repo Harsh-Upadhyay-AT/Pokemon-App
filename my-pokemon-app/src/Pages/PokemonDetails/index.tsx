@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { IRootState, useAppDispatch } from "../../redux/store";
-import { getAbilityDetailsAction } from "../../redux/PokemonDetailSlice/PokemonDetailAsyncThunk";
-import {
-  getAllDetailsAction,
-  getPokemonDetailsAction,
-} from "../../redux/PokemonSlice/PokemonAsyncThunk";
-import { getItem, setItem } from "../../Components/Storage/Storage";
 import Swal, { SweetAlertOptions } from "sweetalert2";
 import { Strings } from "../../Resource/Strings";
+import { IRootState, useAppDispatch } from "redux/store";
+import { getAbilityDetailsAction } from "redux/PokemonDetailSlice/PokemonDetailAsyncThunk";
+import { getAllDetailsAction, getPokemonDetailsAction } from "redux/PokemonSlice/PokemonAsyncThunk";
+import { getItem, setItem } from "Components/Storage";
 
 
 export const CATCH_NAME = "CATCH_NAME";

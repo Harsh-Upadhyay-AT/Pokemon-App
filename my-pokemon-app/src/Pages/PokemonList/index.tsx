@@ -1,16 +1,17 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useSelector } from "react-redux";
-import { getAllDetailsAction } from "../../redux/PokemonSlice/PokemonAsyncThunk";
 import { Fragment, useEffect } from "react";
-import { IRootState, useAppDispatch } from "../../redux/store";
-import { setTotalPageCount } from "../../Service/ApiHepler";
-import { pokemonAction } from "../../redux/PokemonSlice/PokemonSlice";
 import { Link } from "react-router-dom";
-import Pagination from "../../Components/Pagination/Pagination";
-import constant from "../../config/constant/constant";
-import { Strings } from "../../Resource/Strings";
-import "./PokemonList.css";
-import { Loader } from "../../Components/Loader/Loader";
+import "./index.css";
+import { IRootState, useAppDispatch } from "redux/store";
+import { getAllDetailsAction } from "redux/PokemonSlice/PokemonAsyncThunk";
+import { setTotalPageCount } from "Service/ApiHepler";
+import { pokemonAction } from "redux/PokemonSlice/PokemonSlice";
+import { Strings } from "Resource/Strings";
+import Pagination from "Components/Pagination";
+import constant from "config/constant/constant";
+import { Loader } from "Components/Loader";
+
 
 const PokemonList = () => {
   const dispatch = useAppDispatch();

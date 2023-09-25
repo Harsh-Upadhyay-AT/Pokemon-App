@@ -1,8 +1,8 @@
-import React, { FC, Fragment, useEffect, useState } from "react";
-import { getItem, setItem } from "../../Components/Storage/Storage";
-import { CATCH_NAME } from "../PokemonDetails/PokemonDetails";
-import { Strings } from "../../Resource/Strings";
-import './MyPokemonList.css';
+import { FC, useEffect, useState } from "react";
+import "./index.css";
+import { getItem, setItem } from "Components/Storage";
+import { CATCH_NAME } from "Pages/PokemonDetails";
+import { Strings } from "Resource/Strings";
 
 
 interface MyPokemonListProps {

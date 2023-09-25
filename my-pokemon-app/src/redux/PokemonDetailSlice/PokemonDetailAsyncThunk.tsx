@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import constant from "../../config/constant/constant";
-import { getAbilityDetails } from "../../Service/PokemonService";
-// import { getAbilityDetails } from "../../Service/PokemonListService";
-// import constant from "../../config/constant";
+import { getAbilityDetails } from "Service/PokemonService";
+import constant from "config/constant/constant";
+
+
 
 export interface GetAbilityList{
     id: number;

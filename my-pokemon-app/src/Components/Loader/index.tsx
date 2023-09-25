@@ -1,5 +1,6 @@
+import { Strings } from 'Resource/Strings'
 import React from 'react'
-import { Strings } from '../../Resource/Strings'
+
 const Loader = () => {
   const styles = {
     borderRadius: '0.475rem',

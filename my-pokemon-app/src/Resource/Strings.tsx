@@ -18,5 +18,4 @@ export const Strings ={
     startYourPokémonJourneyHere:"Start your Pokémon journey here.",
     clickThisButton:"Click this button",
     successful:"Successful"
-
 }

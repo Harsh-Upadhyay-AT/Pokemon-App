@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import constant from "../../config/constant/constant";
 import {
   getAllDetailsAction,
   getPokemonDetailsAction,
 } from "./PokemonAsyncThunk";
 import { PokemonList } from "./PokemonType";
+import constant from "config/constant/constant";
 
 const initialImage = {
   back_default: "",

@@ -1,5 +1,6 @@
+import { Strings } from "Resource/Strings";
 import React, { FC } from "react";
-import { Strings } from "../../Resource/Strings";
+
 
 interface PaginationProps {
   page: number;

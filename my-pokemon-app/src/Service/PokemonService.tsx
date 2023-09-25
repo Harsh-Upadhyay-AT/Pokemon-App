@@ -1,8 +1,8 @@
+import { GetImageList, GetPokemonList } from "redux/PokemonSlice/PokemonAsyncThunk";
 import api from "../config/api";
-import { GetAbilityList } from "../redux/PokemonDetailSlice/PokemonDetailAsyncThunk";
-import { GetImageList, GetPokemonList } from "../redux/PokemonSlice/PokemonAsyncThunk";
 import { hasError, hasSuccess } from "./ApiHepler";
 import { appClient } from "./networkService";
+import { GetAbilityList } from "redux/PokemonDetailSlice/PokemonDetailAsyncThunk";
 
 export async function getAllDetails(payload: GetPokemonList) {
     try{
