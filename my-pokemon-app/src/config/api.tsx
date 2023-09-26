@@ -6,6 +6,11 @@ const api ={
         pokemon: "pokemon",
         pidgeot: "pokemon/",
         ability: "ability/",
+        berry:"berry/",
+        contestType :"contest-type/",
+        encounterMethod:"encounter-method/",
+        evolutionChain:"evolution-chain/",
+        move:"move/",
     }
 }
 export default api

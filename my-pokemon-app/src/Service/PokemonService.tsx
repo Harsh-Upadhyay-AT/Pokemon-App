@@ -37,3 +37,5 @@ export async function getAbilityDetails(payload: GetAbilityList) {
     return hasError(error);
   }
 }
+
+

@@ -5,6 +5,7 @@ import constant from "config/constant/constant";
 export interface GetAbilityList {
   id: number;
 }
+
 export const getAbilityDetailsAction = createAsyncThunk(
   "AbilityDetails/getAbilityDetailsAction",
   async (payload: GetAbilityList, { dispatch, getState }) => {
@@ -24,3 +25,5 @@ export const getAbilityDetailsAction = createAsyncThunk(
     }
   }
 );
+
+
