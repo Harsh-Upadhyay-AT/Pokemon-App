@@ -1,13 +1,10 @@
 import { useSelector } from "react-redux";
 import { Fragment, useEffect } from "react";
 import { IRootState, useAppDispatch } from "redux/store";
-import { getAllDetailsAction } from "redux/PokemonSlice/PokemonAsyncThunk";
 import { setTotalPageCount } from "Service/ApiHepler";
 import Pagination from "Components/Pagination";
 import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
-import { getAllBerryDetailsAction } from "redux/BerrySlice/BerryAsyncThunk";
-import { BerryAction } from "redux/BerrySlice/BerrySlice";
 import { getAllEncounterDetailsAction } from "redux/EncounterSlice/EncounterAsyncThunk";
 import { EncounterAction } from "redux/EncounterSlice/EncounterSlice";
 
@@ -20,7 +17,6 @@ const EncounterList = () => {
     (state: IRootState) => state.encounterStateData
   );
   list.map((item, index) => {
-    console.log(list,"testing")
     const dynamicId = item?.url?.split("/encounter-method/");
     return dynamicId;
   });
@@ -45,6 +41,16 @@ const EncounterList = () => {
       })
     );
   };
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   return (
     <Fragment>
       {isLoading && list.length === 0 ? (
@@ -53,14 +59,19 @@ const EncounterList = () => {
         <>
           <div className="list">
             {list.map((item, index) => {
-              const pokemonIndex = item?.url?.split("/encounter-method/");
+              const backgroundColor = getRandomColor();
+              const fontColor = getRandomColor();
+              const capitalizedText = item?.name?.toUpperCase();
+              const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=${capitalizedText}`;
+              const itemStyle = {
+                background: backgroundColor,
+                color: fontColor,
+              };
 
-              console.log("image",pokemonIndex)
-              const imageUrl = `https://img.pokemondb.net/artwork/large/${item.name}.png`;
               return (
-                <div className="list-item" key={index}>
+                <div className="list-item" key={index} style={itemStyle}>
                   <img src={imageUrl} />
-                  <div>{item.name}</div>
+                  <div>{capitalizedText}</div>
                 </div>
               );
             })}

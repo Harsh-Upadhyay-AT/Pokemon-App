@@ -19,16 +19,16 @@ const initialImage = {
   };
 
 const initialState: EvolutionList = {
-    list: [],
-    isLoading: false,
-    id: 1,
-    firmness: 1,
-    imagePokemonList: initialImage,
-    offset: constant.offset.defaultNumber,
-    limit: constant.offset.size,
-    total: constant.offset.defaultTotal,
-    name: "",
-
+  list: [],
+  isLoading: false,
+  id: 1,
+  firmness: 1,
+  imagePokemonList: initialImage,
+  offset: constant.offset.defaultNumber,
+  limit: constant.offset.size,
+  total: constant.offset.defaultTotal,
+  name: "",
+  background: 0
 };
 
 const EvolutionSlice = createSlice({

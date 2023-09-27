@@ -1,6 +1,10 @@
 export interface Berry {
     name: string;
     id: number;
+    background :number
+    capitalizedText:number
+    fontColor:number
+    color:number
     url: string;
     game_index: number;
     is_hidden: boolean;

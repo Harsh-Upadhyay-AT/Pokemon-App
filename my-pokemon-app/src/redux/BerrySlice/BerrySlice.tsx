@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BerryList } from "./BerryType";
-// import { getBerryAction } from "./BerryAsyncThunk";
 import constant from "config/constant/constant";
 import { getAllBerryDetailsAction, getBerryDetailsAction } from "./BerryAsyncThunk";
 
@@ -18,23 +17,24 @@ const initialImage = {
   };
 
 const initialState: BerryList = {
-    list: [],
-    isLoading: false,
-    id: 1,
-    growth_time: 1,
-    max_harvest: 1,
-    natural_gift_power: 1,
-    smoothness: 1,
-    soil_dryness: 1,
-    firmness: 1,
-    imagePokemonList: initialImage,
-    offset: constant.offset.defaultNumber,
-    limit: constant.offset.size,
-    total: constant.offset.defaultTotal,
-    name: "",
-    weight: 1,
-    height: 1,
-    order: 1
+  list: [],
+  isLoading: false,
+  id: 1,
+  growth_time: 1,
+  max_harvest: 1,
+  natural_gift_power: 1,
+  smoothness: 1,
+  soil_dryness: 1,
+  firmness: 1,
+  imagePokemonList: initialImage,
+  offset: constant.offset.defaultNumber,
+  limit: constant.offset.size,
+  total: constant.offset.defaultTotal,
+  name: "",
+  weight: 1,
+  height: 1,
+  order: 1,
+
 };
 
 const BerrySlice = createSlice({

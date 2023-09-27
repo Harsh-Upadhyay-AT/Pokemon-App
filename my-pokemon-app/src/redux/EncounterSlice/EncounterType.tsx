@@ -1,8 +1,9 @@
 export interface Encounter {
     id: number;
+    background :number
+    fontColor:number
     name: string;
     url: string;
-    
 }
 
 export interface ImagePokemon {

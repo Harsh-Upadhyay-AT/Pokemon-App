@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllContestDetails, getContestDetails } from "Service/ContestService";
 import { getAllEncounterDetails, getEncounterDetails } from "Service/EncounterService";
 import constant from "config/constant/constant";
 

@@ -5,6 +5,8 @@ export interface Evolution {
     game_index: number;
     is_hidden: boolean;
     height: number;
+    background :number
+    fontColor:number
 }
 
 export interface ImagePokemon {
@@ -27,6 +29,7 @@ export interface EvolutionList {
     firmness: number
     isLoading: boolean;
     imagePokemonList: ImagePokemon;
+    background:number;
   }
 
 

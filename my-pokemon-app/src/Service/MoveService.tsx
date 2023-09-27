@@ -2,7 +2,7 @@ import api from "config/api";
 import { hasSuccess, hasError } from "./ApiHepler";
 import { appClient } from "./networkService";
 import { GetImageList } from "redux/PokemonSlice/PokemonAsyncThunk";
-import { GetMoveList } from "redux/MoveSilce/MoveAsyncThunk";
+import { GetMoveList } from "redux/MoveSlice/MoveAsyncThunk";
 
 
 export async function getAllMoveDetails(payload: GetMoveList) {

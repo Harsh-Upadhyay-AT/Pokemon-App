@@ -21,6 +21,6 @@ export const Strings ={
     noDataAvailable:"No data available",
     welcomeToThePokémonApp:"Welcome to the Pokémon App!",
     startYourPokémonJourneyHere:"Start your Pokémon journey here.",
-    clickThisButton:"Click this button",
+    click:"Click ",
     successful:"Successful"
 }

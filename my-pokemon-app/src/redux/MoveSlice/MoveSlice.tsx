@@ -17,14 +17,14 @@ const initialImage = {
   };
 
 const initialState: MoveList = {
-    list: [],
-    id: 1,
-    imagePokemonList: initialImage,
-    offset: constant.offset.defaultNumber,
-    limit: constant.offset.size,
-    total: constant.offset.defaultTotal,
-    name: "",
-    isLoading: false
+  list: [],
+  id: 1,
+  imagePokemonList: initialImage,
+  offset: constant.offset.defaultNumber,
+  limit: constant.offset.size,
+  total: constant.offset.defaultTotal,
+  isLoading: false,
+  name: ""
 };
 
 const MoveSlice = createSlice({

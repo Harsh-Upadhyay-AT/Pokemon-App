@@ -6,6 +6,7 @@ import { BerryReducer } from "./BerrySlice/BerrySlice";
 import { ContestReducer } from "./ContestSlice/ContestSlice";
 import { EncounterReducer } from "./EncounterSlice/EncounterSlice";
 import { EvolutionReducer } from "./EvolutionSlice/EvolutionSlice";
+import { MoveReducer } from "./MoveSlice/MoveSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     contestStateData:ContestReducer,
     encounterStateData: EncounterReducer,
     evolutionStateData: EvolutionReducer,
+    moveStateData:MoveReducer
   },
 });
 export type IRootState = ReturnType<typeof store.getState>;

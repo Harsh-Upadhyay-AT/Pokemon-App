@@ -9,7 +9,7 @@ const Welcome: React.FC = () => {
       <h1>{Strings.welcomeToThePokémonApp}</h1>
       <p>{Strings.startYourPokémonJourneyHere}</p>
       <Link to="/pokemon/list">
-        <button>{Strings.clickThisButton}</button>
+        <button>{Strings.click}</button>
       </Link>
     </div>
   );

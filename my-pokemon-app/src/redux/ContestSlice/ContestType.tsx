@@ -4,6 +4,8 @@ export interface Contest {
     appeal: number;
     jam: number;
     url: string;
+    background :number
+    fontColor:number
 }
 
 export interface ImagePokemon {
@@ -46,5 +48,3 @@ export interface ContestList {
   export interface names {
     name: string;
   }
-
- 

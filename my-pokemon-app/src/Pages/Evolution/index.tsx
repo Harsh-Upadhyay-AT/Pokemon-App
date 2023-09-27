@@ -1,15 +1,10 @@
 import { useSelector } from "react-redux";
 import { Fragment, useEffect } from "react";
 import { IRootState, useAppDispatch } from "redux/store";
-import { getAllDetailsAction } from "redux/PokemonSlice/PokemonAsyncThunk";
 import { setTotalPageCount } from "Service/ApiHepler";
 import Pagination from "Components/Pagination";
 import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
-import { getAllBerryDetailsAction } from "redux/BerrySlice/BerryAsyncThunk";
-import { BerryAction } from "redux/BerrySlice/BerrySlice";
-import { getAllContestDetailsAction } from "redux/ContestSlice/ContestAsyncThunk";
-import { ContestAction } from "redux/ContestSlice/ContestSlice";
 import { getAllEvolutionDetailsAction } from "redux/EvolutionSlice/EvolutionAsyncThunk";
 import { EncounterAction } from "redux/EncounterSlice/EncounterSlice";
 
@@ -46,6 +41,16 @@ const Evolution = () => {
       })
     );
   };
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   return (
     <Fragment>
       {isLoading && list.length === 0 ? (
@@ -54,13 +59,17 @@ const Evolution = () => {
         <>
           <div className="list">
             {list.map((item, index) => {
-              const pokemonIndex = item?.url?.split("/evolution-chain/");
-               console.log(pokemonIndex)
-              const imageUrl = `http://pokeapi.co/media/sprites/pokemon/${pokemonIndex}.png`;
+              const backgroundColor = getRandomColor();
+              const fontColor = getRandomColor();
+              const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=Pokemon`;
+              const itemStyle = {
+                background: backgroundColor,
+                color: fontColor,
+              };
+
               return (
-                <div className="list-item" key={index}>
+                <div className="list-item" key={index} style={itemStyle}>
                   <img src={imageUrl} />
-                  <div>{item.name}</div>
                 </div>
               );
             })}

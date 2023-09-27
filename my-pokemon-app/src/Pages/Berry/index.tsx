@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { Fragment, useEffect } from "react";
 import { IRootState, useAppDispatch } from "redux/store";
-import { getAllDetailsAction } from "redux/PokemonSlice/PokemonAsyncThunk";
 import { setTotalPageCount } from "Service/ApiHepler";
 import Pagination from "Components/Pagination";
 import constant from "config/constant/constant";
@@ -17,20 +16,19 @@ const BerriesList = () => {
   const { list, id, offset, total, limit } = useSelector(
     (state: IRootState) => state.berryStateData
   );
-  list.map((item, index) => {
-    const dynamicId = item?.url?.split("/berry/");
-    return dynamicId;
-  });
+
   useEffect(() => {
     dispatch(
-        getAllBerryDetailsAction({
+      getAllBerryDetailsAction({
         id: 0,
         offset,
         limit,
       })
     );
   }, [dispatch, id, limit, offset]);
+
   const totalPage = setTotalPageCount(total, limit);
+
   const pageChangeHandler = (currentPage: number) => {
     const page = Number(currentPage);
     dispatch(BerryAction.setCurrentPage(page));
@@ -42,6 +40,16 @@ const BerriesList = () => {
       })
     );
   };
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   return (
     <Fragment>
       {isLoading && list.length === 0 ? (
@@ -50,13 +58,19 @@ const BerriesList = () => {
         <>
           <div className="list">
             {list.map((item, index) => {
-              const pokemonIndex = item?.url?.split("/berry/");
-              const imageUrl = `http://pokeapi.co/media/sprites/pokemon/${pokemonIndex}.png`;
-              console.log("image",imageUrl)
+              const backgroundColor = getRandomColor();
+              const fontColor = getRandomColor();
+              const capitalizedText = item?.name?.toUpperCase();
+              const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=${capitalizedText}`;
+              const itemStyle = {
+                background: backgroundColor,
+                color: fontColor,
+              };
+
               return (
-                <div className="list-item" key={index}>
-                  <img src={imageUrl} />
-                  <div>{item.name}</div>
+                <div className="list-item" key={index} style={itemStyle}>
+                  <img src={imageUrl}  />
+                  <div>{capitalizedText}</div>
                 </div>
               );
             })}
@@ -77,4 +91,5 @@ const BerriesList = () => {
     </Fragment>
   );
 };
+
 export default BerriesList;

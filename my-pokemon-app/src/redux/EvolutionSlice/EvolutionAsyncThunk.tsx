@@ -12,7 +12,6 @@ export interface GetEvolutionList {
   export interface GetImageList {
     id: number;
   }
-  
   export const getAllEvolutionDetailsAction = createAsyncThunk(
     "details/getAllBerryDetailsAction",
     async (payload: GetEvolutionList, { dispatch, getState }) => {
