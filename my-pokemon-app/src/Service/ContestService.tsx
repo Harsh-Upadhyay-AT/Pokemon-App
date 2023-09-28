@@ -1,8 +1,7 @@
 import api from "config/api";
 import { hasSuccess, hasError } from "./ApiHepler";
 import { appClient } from "./networkService";
-import { GetImageList } from "redux/BerrySlice/BerryAsyncThunk";
-import { GetContestList } from "redux/ContestSlice/ContestAsyncThunk";
+import { GetContestList, GetImageList } from "redux/ContestSlice/ContestAsyncThunk";
 
 export async function getAllContestDetails(payload: GetContestList) {
     try {

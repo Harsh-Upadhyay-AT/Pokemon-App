@@ -8,10 +8,11 @@ export interface GetBerryList {
     limit: number;
   }
 
-  export interface GetImageList {
+  export interface GetBerryDetailsList {
+    // url:number;
     id: number;
   }
-  
+
   export const getAllBerryDetailsAction = createAsyncThunk(
     "details/getAllBerryDetailsAction",
     async (payload: GetBerryList, { dispatch, getState }) => {
@@ -32,7 +33,7 @@ export interface GetBerryList {
   );
   export const getBerryDetailsAction = createAsyncThunk(
     "berryDetails/getBerryDetailsAction",
-    async (payload: GetImageList, { dispatch, getState }) => {
+    async (payload: GetBerryDetailsList, { dispatch, getState }) => {
       try {
         const response = await getBerryDetails(payload);
         if (response.status === constant.APIResponse.defaultStatusCode) {
@@ -40,9 +41,9 @@ export interface GetBerryList {
             data: response?.data,
             spec: response?.data?.species,
             name: response?.data?.name,
-            order: response?.data?.order,
-            weight: response?.data?.weight,
-            height: response?.data?.height,
+            growthTime: response?.data?.growth_time,
+            maxHarvest : response?.data?.max_harvest,
+            naturalGiftPower: response?.data?.natural_gift_power
           };
         } else if (response.status === constant.APIResponse.errorStatusCode) {
           return response?.data?.message;

@@ -9,6 +9,7 @@ export interface GetContestList {
 }
 
 export interface GetImageList {
+    url:number
     id: number;
 }
 

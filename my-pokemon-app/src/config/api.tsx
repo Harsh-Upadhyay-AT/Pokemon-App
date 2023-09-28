@@ -7,6 +7,8 @@ const api ={
         pidgeot: "pokemon/",
         ability: "ability/",
         berry:"berry/",
+        berryfirmness:"berry-firmness/",
+        berryflavor:"berry-flavor/",
         contestType :"contest-type/",
         encounterMethod:"encounter-method/",
         evolutionChain:"evolution-chain/",

@@ -1,5 +1,6 @@
 import Layout from "Layout";
 import Berry from "Pages/Berry";
+import BerryDetails from "Pages/Berry/BerryDetails";
 import ContestType from "Pages/Contest";
 import EncounterList from "Pages/Encounter";
 import Evolution from "Pages/Evolution";
@@ -20,6 +21,7 @@ const AppRoutes = () => {
           <Route path="/my/pokemon/list/" element={<MyPokemonList />} />
           <Route path="pokemon/:listId" element={<PokemonDetails />} />
           <Route path="/berry/" element={<Berry/>} />
+          <Route path="berry/:listId" element={<BerryDetails />} />
           <Route path="/contest-type/" element={<ContestType />} />
           <Route path="/encounter-method/" element={<EncounterList />} />
           <Route path="/evolution-chain/" element={<Evolution />}/>
