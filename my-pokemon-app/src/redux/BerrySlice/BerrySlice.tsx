@@ -4,37 +4,24 @@ import constant from "config/constant/constant";
 import { getAllBerryDetailsAction, getBerryDetailsAction } from "./BerryAsyncThunk";
 
 const initialImage = {
-    back_default: "",
-    back_shiny: "",
-    front_default: "",
-    front_shiny: "",
-    name: "",
-    url: "",
-    id: 1,
-    weight: 1,
-    height: 1,
-    order: 1,
+    name: '',
+    id:1,
+    max_harvest:1,
+    natural_gift_power: 1,
+    smoothness: 1,
+    soil_dryness: 1,
+    firmness: 1,
   };
 
 const initialState: BerryList = {
   list: [],
   isLoading: false,
   id: 1,
-  growth_time: 1,
-  max_harvest: 1,
-  natural_gift_power: 1,
-  smoothness: 1,
-  soil_dryness: 1,
-  firmness: 1,
-  imagePokemonList: initialImage,
   offset: constant.offset.defaultNumber,
   limit: constant.offset.size,
   total: constant.offset.defaultTotal,
   name: "",
-  weight: 1,
-  height: 1,
-  order: 1,
-
+  imagePokemonList: initialImage
 };
 
 const BerrySlice = createSlice({
@@ -50,6 +37,9 @@ const BerrySlice = createSlice({
     setCurrentPage: (state, action) => {
       state.offset = action.payload;
     },
+    resetSpecificPerson(state) {
+      state.imagePokemonList = initialImage
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -68,6 +58,9 @@ const BerrySlice = createSlice({
           state.isLoading = false;
         }
       )
+      .addCase(getAllBerryDetailsAction.rejected, (state: BerryList)=> {
+        state.isLoading = false;
+      })
       .addCase(getBerryDetailsAction.pending, (state: BerryList) => {
         state.isLoading = true;
       })
@@ -75,14 +68,16 @@ const BerrySlice = createSlice({
         getBerryDetailsAction.fulfilled,
         (state: BerryList, { payload }) => {
           if (payload) {
-            const { data, spec, name, weight, height, order } = payload;
+            const { data, spec, name,  growth_time, max_harvest, natural_gift_power, smoothness, soil_dryness } = payload;
             state.imagePokemonList = {
               ...data,
               ...spec,
-              weight,
-              height,
               name,
-              order,
+              growth_time,
+              max_harvest,
+              natural_gift_power,
+              smoothness,
+              soil_dryness
             };
           } else {
             state.imagePokemonList = initialImage;

@@ -12,16 +12,13 @@ export interface Berry {
 }
 
 export interface ImagePokemon {
-    back_default: string;
-    back_shiny: string;
-    front_default: string;
-    front_shiny: string;
     name: string;
-    url: string;
     id: number;
-    weight: number;
-    order: number;
-    height: number;
+    max_harvest: number;
+    natural_gift_power: number;
+    smoothness: number;
+    soil_dryness: number;
+    firmness: number;
   }
 
 export interface BerryList {
@@ -30,20 +27,10 @@ export interface BerryList {
     name: string
     limit: number;
     offset: number;
-    growth_time: number
     total: number;
-    max_harvest: number
-    natural_gift_power	: number
-    smoothness: number
-    soil_dryness: number
-    firmness: number
     isLoading: boolean;
     imagePokemonList: ImagePokemon;
-    weight: number;
-    height: number;
-    order: number;
   }
-
 
   export interface Language {
     name: string;
@@ -53,5 +40,3 @@ export interface BerryList {
   export interface names {
     name: string;
   }
-
- 

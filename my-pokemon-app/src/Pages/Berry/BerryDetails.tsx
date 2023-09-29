@@ -1,59 +1,58 @@
 import { useSelector } from "react-redux";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { IRootState, useAppDispatch } from "redux/store";
-import { Loader } from "Components/Loader";
 import { getBerryDetailsAction } from "redux/BerrySlice/BerryAsyncThunk";
-
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { BerryAction } from "redux/BerrySlice/BerrySlice";
 import { Strings } from "Resource/Strings";
+
 
 const BerriesDetailsList = () => {
   const dispatch = useAppDispatch();
-  const [berryDetails, setBerryDetails] = useState<string>("");
-  const { isLoading } = useSelector(
+  const { listId } = useParams()
+  const { offset, limit } = useSelector(
     (state: IRootState) => state.berryStateData
   );
-  const { list, id, offset, total, limit } = useSelector(
-    (state: IRootState) => state.berryStateData
-  );
-  list.map((item, index) => {
-    const dynamicId = item?.url?.split("/berry/");
-    return dynamicId;
-  });
+  const { imagePokemonList } = useSelector((state:IRootState)=> state.berryStateData)
+
   useEffect(() => {
+    const id = Number(listId)
     dispatch(getBerryDetailsAction({
         id,
-    }))
-
-  }, [dispatch, id, limit, offset]);
+    })
+    )
+    return () => {
+      dispatch(BerryAction.resetSpecificPerson())
+    }
+  }, [dispatch, listId, limit, offset]);
 
   return (
-    <Fragment>
-      {isLoading && list.length === 0 ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="list">
-            {list.map((item, index) => {
-              const capitalizedText = item?.name?.toUpperCase();
-              const berryIndex = item?.url?.split("/berry/");
-              return (
-                <div className="list-item" key={index} >
-                  <div>
-                <Link to={`/berry/${berryIndex?.[1]?.replace("/", "")}`}>
-                <button>{Strings.viewDetail}</button>
-            
-                </Link>
-              </div>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-          </div>
-        </>
-      )}
-    </Fragment>
+    <>
+    <div>
+      <li>
+        <span>{imagePokemonList.name}</span>
+      </li>
+      <li style={{ marginBottom: "10px" }}>
+              <span className="title-text">name:</span> {imagePokemonList?.name}
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              <span className="title-text">max:</span> {imagePokemonList?.firmness}
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              <span className="title-text">damage:</span> {imagePokemonList?.max_harvest}
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              <span className="title-text">test:</span> {imagePokemonList?.natural_gift_power}
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+                <span className="title-text">item:</span> {imagePokemonList?.smoothness}
+            </li>
+            <li style={{ marginBottom: "10px" }}>
+              <span className="title-text">testOne:</span> {imagePokemonList?.soil_dryness}
+            </li>
+
+    </div>
+    </>
   );
 };
 

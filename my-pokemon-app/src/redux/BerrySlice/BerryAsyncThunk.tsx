@@ -36,6 +36,7 @@ export interface GetBerryList {
     async (payload: GetBerryDetailsList, { dispatch, getState }) => {
       try {
         const response = await getBerryDetails(payload);
+        // console.log(response,"tesing response")
         if (response.status === constant.APIResponse.defaultStatusCode) {
           return {
             data: response?.data,
@@ -43,7 +44,9 @@ export interface GetBerryList {
             name: response?.data?.name,
             growthTime: response?.data?.growth_time,
             maxHarvest : response?.data?.max_harvest,
-            naturalGiftPower: response?.data?.natural_gift_power
+            naturalGiftPower: response?.data?.natural_gift_power,
+            smoothness: response?.data?.smoothness,
+            soilDryness:response?.data?.soil_dryness,
           };
         } else if (response.status === constant.APIResponse.errorStatusCode) {
           return response?.data?.message;

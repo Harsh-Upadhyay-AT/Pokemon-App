@@ -5,14 +5,13 @@ import { setTotalPageCount } from "Service/ApiHepler";
 import Pagination from "Components/Pagination";
 import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
-import { getAllBerryDetailsAction, getBerryDetailsAction } from "redux/BerrySlice/BerryAsyncThunk";
+import { getAllBerryDetailsAction } from "redux/BerrySlice/BerryAsyncThunk";
 import { BerryAction } from "redux/BerrySlice/BerrySlice";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Strings } from "Resource/Strings";
 
 const BerriesList = () => {
   const dispatch = useAppDispatch();
-  // const { listId } = useParams()
   const { isLoading } = useSelector(
     (state: IRootState) => state.berryStateData
   );
@@ -24,10 +23,9 @@ const BerriesList = () => {
     return dynamicId;
   });
   useEffect(() => {
-    
     dispatch(
       getAllBerryDetailsAction({
-        id: 1,
+        id,
         offset,
         limit,
       })
@@ -69,7 +67,6 @@ const BerriesList = () => {
               const fontColor = getRandomColor();
               const capitalizedText = item?.name?.toUpperCase();
               const berryIndex = item?.url?.split("/berry/");
-              console.log(berryIndex,"test")
               const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=${capitalizedText}`;
               const itemStyle = {
                 background: backgroundColor,
