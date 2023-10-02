@@ -77,7 +77,7 @@ export interface MoveList {
     limit: number;
     offset: number;
     total: number;
-
+    ListAilments:MoveAilments
     isLoading: boolean;
     imagePokemonList: ImagePokemon;
   }
@@ -92,3 +92,11 @@ export interface MoveList {
     name: string;
   }
 
+
+  interface MoveAilments  {
+    id: number;
+    name: string;
+    moves: { name: string; url: string }[];
+    names: { name: string; language: { name: string; url: string } }[];
+  }
+  

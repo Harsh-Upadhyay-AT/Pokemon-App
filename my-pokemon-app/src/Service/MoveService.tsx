@@ -30,21 +30,21 @@ export async function getAllMoveDetails(payload: GetMoveList) {
     }
   }
 
-  // export async function getMoveAilments (payload: GetMoveAilment) {
-  //   try {
-  //     const response = await appClient.get(api.endPoint.moveAilments + payload.id);
-  //     console.log(response,"zxcvxzcvsdfa")
-  //     return hasSuccess(response?.data);
-  //   } catch (error) {
-  //     return hasError(error);
-  //   }
-  // }
+  export async function getMoveAilments (payload: GetMoveAilment) {
+    try {
+      const response = await appClient.get(api.endPoint.moveAilments + payload.id);
+      console.log(response,"zxcvxzcvsdfa")
+      return hasSuccess(response?.data);
+    } catch (error) {
+      return hasError(error);
+    }
+  }
 
-  // export async function getMoveCategories(payload: GetMoveCategories) {
-  //   try {
-  //     const response = await appClient.get(api.endPoint.moveCategory + payload.id);
-  //     return hasSuccess(response?.data);
-  //   } catch (error) {
-  //     return hasError(error);
-  //   }
-  // }
+  export async function getMoveCategories(payload: GetMoveCategories) {
+    try {
+      const response = await appClient.get(api.endPoint.moveCategory + payload.id);
+      return hasSuccess(response?.data);
+    } catch (error) {
+      return hasError(error);
+    }
+  }

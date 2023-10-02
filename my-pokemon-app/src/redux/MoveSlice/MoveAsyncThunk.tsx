@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllMoveDetails, getMove } from "Service/MoveService";
+import { getAllMoveDetails, getMove, getMoveAilments } from "Service/MoveService";
 import constant from "config/constant/constant";
 
 export interface GetMoveList {
@@ -59,23 +59,23 @@ export const getMoveAction = createAsyncThunk(
   );
 
 
-  // export const getMoveAilment = createAsyncThunk(
-  //   "moveDetails/getMoveAilment",
-  //   async (payload: GetMoveAilment, { dispatch, getState }) => {
-  //     try {
-  //       const response = await getMoveAilments(payload);
-  //       console.log(response,"testonetest")
-  //       if (response.status === constant.APIResponse.defaultStatusCode) {
-  //         return {
-  //           data: response?.data
-  //         };
-  //       } else if (response.status === constant.APIResponse.errorStatusCode) {
-  //         return response?.data?.message;
-  //       }
-  //     } catch (error) {
-  //       return error;
-  //     }
-  //   }
-  // );
+  export const getMoveAilment = createAsyncThunk(
+    "moveDetails/getMoveAilment",
+    async (payload: GetMoveAilment, { dispatch, getState }) => {
+      try {
+        const response = await getMoveAilments(payload);
+        console.log(response,"testonetest")
+        if (response.status === constant.APIResponse.defaultStatusCode) {
+          return {
+            data: response?.data
+          };
+        } else if (response.status === constant.APIResponse.errorStatusCode) {
+          return response?.data?.message;
+        }
+      } catch (error) {
+        return error;
+      }
+    }
+  );
 
   

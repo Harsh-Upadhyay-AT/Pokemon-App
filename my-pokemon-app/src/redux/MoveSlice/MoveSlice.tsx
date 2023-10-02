@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import constant from "config/constant/constant";
-import { getAllMoveDetailsAction } from "./MoveAsyncThunk";
+import { getAllMoveDetailsAction, getMoveAilment } from "./MoveAsyncThunk";
 import {  MoveList } from "./MoveType";
 
 const initialImage = {
@@ -16,6 +16,28 @@ const initialImage = {
     order: 1,
   };
 
+
+  const MoveAilmentsList = {
+    id: 1,
+    name: "",
+    moves: [
+      {
+        name: "",
+        url: "",
+      },
+    ],
+    names: [
+      {
+        name: "",
+        language: {
+          name: "",
+          url: "",
+        },
+      },
+    ],
+  };
+
+
 const initialState: MoveList = {
   list: [],
   id: 1,
@@ -24,7 +46,8 @@ const initialState: MoveList = {
   limit: constant.offset.size,
   total: constant.offset.defaultTotal,
   isLoading: false,
-  name: ""
+  name: "",
+  ListAilments: MoveAilmentsList
 };
 
 const MoveSlice = createSlice({
@@ -58,31 +81,24 @@ const MoveSlice = createSlice({
           state.isLoading = false;
         }
       )
-      // .addCase(getMoveDetailsAction.pending, (state: MoveList) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(
-      //   getMoveDetailsAction.fulfilled,
-      //   (state: MoveList, { payload }) => {
-      //     if (payload) {
-      //       const { data, spec, name, weight, height, order } = payload;
-      //       state.imagePokemonList = {
-      //         ...data,
-      //         ...spec,
-      //         weight,
-      //         height,
-      //         name,
-      //         order,
-      //       };
-      //     } else {
-      //       state.imagePokemonList = initialImage;
-      //     }
-      //     state.isLoading = false;
-      //   }
-      // )
-      // .addCase(getMoveDetailsAction.rejected, (state: MoveList) => {
-      //   state.isLoading = false;
-      // });
+      .addCase(getMoveAilment.pending, (state: MoveList) => {
+        state.isLoading = true;
+       })
+      .addCase(
+        getMoveAilment.fulfilled,
+         (state: MoveList, { payload }) => {
+           if (payload?.data) {
+      state.ListAilments = payload?.data
+      state.total = payload?.count;
+           } else {
+      state.imagePokemonList = initialImage;
+          }
+          state.isLoading = false;
+         }
+       )
+       .addCase(getMoveAilment.rejected, (state: MoveList) => {
+         state.isLoading = false;
+       });
   },
 });
 export const MoveReducer = MoveSlice.reducer;
