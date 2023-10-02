@@ -25,6 +25,9 @@ export interface EncounterList {
     total: number;
     isLoading: boolean;
     imagePokemonList: ImagePokemon;
+    EncounterMethodList:EncounterMethods
+    EncounterConditionList:EncounterCondition
+    EncounterConditionValueList:EncounterConditionValue
   }
 
 
@@ -38,4 +41,50 @@ export interface EncounterList {
     url: string;
   }
 
- 
+
+  interface EncounterMethods {
+    id: number;
+    name: string;
+    order: number;
+    names: {
+      name: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }
+
+
+  interface EncounterCondition {
+    id: number;
+    name: string;
+    values: {
+      name: string;
+      url: string;
+    }[];
+    names: {
+      name: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }
+
+
+  interface EncounterConditionValue {
+    id: number;
+    name: string;
+    condition: {
+      name: string;
+      url: string;
+    };
+    names: {
+      name: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }

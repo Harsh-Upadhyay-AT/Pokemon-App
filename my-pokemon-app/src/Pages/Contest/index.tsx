@@ -7,6 +7,8 @@ import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
 import { getAllContestDetailsAction } from "redux/ContestSlice/ContestAsyncThunk";
 import { ContestAction } from "redux/ContestSlice/ContestSlice";
+import { Link } from "react-router-dom";
+import { Strings } from "Resource/Strings";
 
 const ContestType = () => {
   const dispatch = useAppDispatch();
@@ -62,6 +64,7 @@ const ContestType = () => {
               const backgroundColor = getRandomColor();
               const fontColor = getRandomColor();
               const capitalizedText = item?.name?.toUpperCase();
+              const ContestIndex = item?.url?.split("/contest-type/");
               const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=${capitalizedText}`;
               const itemStyle = {
                 background: backgroundColor,
@@ -71,6 +74,9 @@ const ContestType = () => {
                 <div className="list-item" key={index} style={itemStyle}>
                   <img src={imageUrl} />
                   <div>{capitalizedText}</div>
+                  <Link to={`/contest-type/${ContestIndex?.[1]?.replace("/", "")}`}>
+                <button>{Strings.viewDetail}</button>
+                  </Link>
                 </div>
               );
             })}

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllMoveDetails, getMoveDetails } from "Service/MoveService";
+import { getAllMoveDetails, getMove } from "Service/MoveService";
 import constant from "config/constant/constant";
 
 export interface GetMoveList {
@@ -8,9 +8,18 @@ export interface GetMoveList {
     limit: number;
 }
 
-export interface GetImageList {
-    id: number;
+export interface GetMoveAilment {
+  id: number;
 }
+
+export interface GetMove {
+  id: number;
+}
+
+export interface GetMoveCategories {
+  id: number;
+}
+
 
 export const getAllMoveDetailsAction = createAsyncThunk(
     "details/getAllContestDetailsAction",
@@ -31,16 +40,14 @@ export const getAllMoveDetailsAction = createAsyncThunk(
     }
 );
 
-export const getMoveDetailsAction = createAsyncThunk(
-    "moveDetails/getContestDetailsAction",
-    async (payload: GetImageList, { dispatch, getState }) => {
+export const getMoveAction = createAsyncThunk(
+    "moveDetails/getMoveAction",
+    async (payload: GetMove, { dispatch, getState }) => {
       try {
-        const response = await getMoveDetails(payload);
+        const response = await getMove(payload);
         if (response.status === constant.APIResponse.defaultStatusCode) {
           return {
-            data: response?.data,
-            spec: response?.data?.species,
-            name: response?.data?.name,
+            data: response?.data
           };
         } else if (response.status === constant.APIResponse.errorStatusCode) {
           return response?.data?.message;
@@ -50,3 +57,25 @@ export const getMoveDetailsAction = createAsyncThunk(
       }
     }
   );
+
+
+  // export const getMoveAilment = createAsyncThunk(
+  //   "moveDetails/getMoveAilment",
+  //   async (payload: GetMoveAilment, { dispatch, getState }) => {
+  //     try {
+  //       const response = await getMoveAilments(payload);
+  //       console.log(response,"testonetest")
+  //       if (response.status === constant.APIResponse.defaultStatusCode) {
+  //         return {
+  //           data: response?.data
+  //         };
+  //       } else if (response.status === constant.APIResponse.errorStatusCode) {
+  //         return response?.data?.message;
+  //       }
+  //     } catch (error) {
+  //       return error;
+  //     }
+  //   }
+  // );
+
+  

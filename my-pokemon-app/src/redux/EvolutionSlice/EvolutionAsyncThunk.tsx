@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllEvolutionDetails, getEvolutionDetails } from "Service/EvolutionService";
+import { getAllEvolutionDetails, getEvolutionChain, getEvolutionTriggers } from "Service/EvolutionService";
 import constant from "config/constant/constant";
 
 
@@ -9,7 +9,12 @@ export interface GetEvolutionList {
     limit: number;
   }
 
-  export interface GetImageList {
+  export interface GetEvolutionChain {
+    id: number;
+  }
+
+  
+  export interface GetEvolutionTriggers  {
     id: number;
   }
   export const getAllEvolutionDetailsAction = createAsyncThunk(
@@ -30,19 +35,14 @@ export interface GetEvolutionList {
       }
     }
   );
-  export const getEvolutionDetailsAction = createAsyncThunk(
-    "evolutionDetails/getEvolutionDetailsAction",
-    async (payload: GetImageList, { dispatch, getState }) => {
+  export const getEvolutionChainsAction = createAsyncThunk(
+    "evolutionDetails/getEvolutionChainsAction",
+    async (payload: GetEvolutionChain, { dispatch, getState }) => {
       try {
-        const response = await getEvolutionDetails(payload);
+        const response = await getEvolutionChain(payload);
         if (response.status === constant.APIResponse.defaultStatusCode) {
           return {
             data: response?.data,
-            spec: response?.data?.species,
-            name: response?.data?.name,
-            order: response?.data?.order,
-            weight: response?.data?.weight,
-            height: response?.data?.height,
           };
         } else if (response.status === constant.APIResponse.errorStatusCode) {
           return response?.data?.message;
@@ -53,3 +53,22 @@ export interface GetEvolutionList {
     }
   );
   
+
+  export const getEvolutionTriggersAction = createAsyncThunk(
+    "evolutionDetails/getEvolutionTriggersAction",
+    async (payload: GetEvolutionTriggers, { dispatch, getState }) => {
+      try {
+        const response = await getEvolutionTriggers(payload);
+        console.log(response,'testfasdf')
+        if (response.status === constant.APIResponse.defaultStatusCode) {
+          return {
+            data: response?.data,
+          };
+        } else if (response.status === constant.APIResponse.errorStatusCode) {
+          return response?.data?.message;
+        }
+      } catch (error) {
+        return error;
+      }
+    }
+  );

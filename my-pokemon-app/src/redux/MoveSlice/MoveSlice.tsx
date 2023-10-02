@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import constant from "config/constant/constant";
-import { getAllMoveDetailsAction, getMoveDetailsAction } from "./MoveAsyncThunk";
+import { getAllMoveDetailsAction } from "./MoveAsyncThunk";
 import {  MoveList } from "./MoveType";
 
 const initialImage = {
@@ -58,31 +58,31 @@ const MoveSlice = createSlice({
           state.isLoading = false;
         }
       )
-      .addCase(getMoveDetailsAction.pending, (state: MoveList) => {
-        state.isLoading = true;
-      })
-      .addCase(
-        getMoveDetailsAction.fulfilled,
-        (state: MoveList, { payload }) => {
-          if (payload) {
-            const { data, spec, name, weight, height, order } = payload;
-            state.imagePokemonList = {
-              ...data,
-              ...spec,
-              weight,
-              height,
-              name,
-              order,
-            };
-          } else {
-            state.imagePokemonList = initialImage;
-          }
-          state.isLoading = false;
-        }
-      )
-      .addCase(getMoveDetailsAction.rejected, (state: MoveList) => {
-        state.isLoading = false;
-      });
+      // .addCase(getMoveDetailsAction.pending, (state: MoveList) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(
+      //   getMoveDetailsAction.fulfilled,
+      //   (state: MoveList, { payload }) => {
+      //     if (payload) {
+      //       const { data, spec, name, weight, height, order } = payload;
+      //       state.imagePokemonList = {
+      //         ...data,
+      //         ...spec,
+      //         weight,
+      //         height,
+      //         name,
+      //         order,
+      //       };
+      //     } else {
+      //       state.imagePokemonList = initialImage;
+      //     }
+      //     state.isLoading = false;
+      //   }
+      // )
+      // .addCase(getMoveDetailsAction.rejected, (state: MoveList) => {
+      //   state.isLoading = false;
+      // });
   },
 });
 export const MoveReducer = MoveSlice.reducer;

@@ -7,6 +7,8 @@ import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
 import { getAllEncounterDetailsAction } from "redux/EncounterSlice/EncounterAsyncThunk";
 import { EncounterAction } from "redux/EncounterSlice/EncounterSlice";
+import { Strings } from "Resource/Strings";
+import { Link } from "react-router-dom";
 
 const EncounterList = () => {
   const dispatch = useAppDispatch();
@@ -62,6 +64,7 @@ const EncounterList = () => {
               const backgroundColor = getRandomColor();
               const fontColor = getRandomColor();
               const capitalizedText = item?.name?.toUpperCase();
+              const EncounterMethod = item?.url?.split("/encounter-method/");
               const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=${capitalizedText}`;
               const itemStyle = {
                 background: backgroundColor,
@@ -72,6 +75,9 @@ const EncounterList = () => {
                 <div className="list-item" key={index} style={itemStyle}>
                   <img src={imageUrl} />
                   <div>{capitalizedText}</div>
+                  <Link to={`/encounter-method/${EncounterMethod?.[1]?.replace("/", "")}`}>
+                  <button>{Strings.viewDetail}</button>
+                  </Link>
                 </div>
               );
             })}

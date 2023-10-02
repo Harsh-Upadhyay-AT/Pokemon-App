@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import constant from "config/constant/constant";
-import { getAllContestDetailsAction, getContestDetailsAction } from "./ContestAsyncThunk";
-import { ContestList } from "./ContestType";
+import { getAllContestDetailsAction, getContestEffectsAction, getContestTypesAction, getSuperContestEffectsAction } from "./ContestAsyncThunk";
+import { ContestList, ContestsList } from "./ContestType";
 
 const initialImage = {
     back_default: "",
@@ -16,17 +16,89 @@ const initialImage = {
     order: 1,
   };
 
-const initialState: ContestList = {
-    list: [],
-    id: 1,
-    imagePokemonList: initialImage,
-    offset: constant.offset.defaultNumber,
-    limit: constant.offset.size,
-    total: constant.offset.defaultTotal,
+ const ContestsTypes = {
+  id: 0,
+  name: "",
+  berry_flavor: {
     name: "",
-    flavor_text_entries: [],
-    effect_entries: [],
-    isLoading: false
+    url: "",
+  },
+  names: [
+    {
+      name: "",
+      color: "",
+      language: {
+        name: "",
+        url: "",
+      },
+    },
+  ],
+ }
+
+
+ const ContestsMoveEffect={
+  id: 0,
+  appeal: 0,
+  jam: 0,
+  effect_entries: [
+    {
+      effect: "",
+      language: {
+        name: "",
+        url: "",
+      },
+    },
+  ],
+  flavor_text_entries: [
+    {
+      flavor_text: "",
+      language: {
+        name: "",
+        url: "",
+      },
+    },
+  ],
+};
+
+
+const SuperContestEffect = {
+  id: 0,
+  appeal: 0,
+  flavor_text_entries: [
+    {
+      flavor_text: "",
+      language: {
+        name: "",
+        url: "",
+      },
+    },
+  ],
+  moves: [
+    {
+      name: "",
+      url: "",
+    },
+  ],
+};
+
+
+
+
+
+const initialState: ContestsList = {
+  list: [],
+  id: 0,
+  name: "",
+  flavor_text_entries: [],
+  effect_entries: [],
+  isLoading: false,
+  imagePokemonList: initialImage,
+  offset: constant.offset.defaultNumber,
+  limit: constant.offset.size,
+  total: constant.offset.defaultTotal,
+  contestsType: ContestsTypes,
+  ContestEffectList:ContestsMoveEffect,
+  SuperContestEffectsList:SuperContestEffect
 };
 
 const ContestSlice = createSlice({
@@ -45,12 +117,12 @@ const ContestSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllContestDetailsAction.pending, (state: ContestList) => {
+      .addCase(getAllContestDetailsAction.pending, (state: ContestsList) => {
         state.isLoading = true;
       })
       .addCase(
         getAllContestDetailsAction.fulfilled,
-        (state: ContestList, { payload }) => {
+        (state: ContestsList, { payload }) => {
           if (payload) {
             state.list = payload?.data;
             state.total = payload?.count;
@@ -60,31 +132,61 @@ const ContestSlice = createSlice({
           state.isLoading = false;
         }
       )
-      .addCase(getContestDetailsAction.pending, (state: ContestList) => {
+      .addCase(getContestTypesAction.rejected, (state: ContestsList) => {
+        state.isLoading = false;
+      }).addCase(getContestTypesAction.pending, (state: ContestsList) => {
         state.isLoading = true;
       })
       .addCase(
-        getContestDetailsAction.fulfilled,
-        (state: ContestList, { payload }) => {
-          if (payload) {
-            const { data, spec, name, weight, height, order } = payload;
-            state.imagePokemonList = {
-              ...data,
-              ...spec,
-              weight,
-              height,
-              name,
-              order,
-            };
+        getContestTypesAction.fulfilled,
+        (state: ContestsList, { payload }) => {
+          if (payload?.data) {
+            state.contestsType = payload?.data;
+            state.total = payload?.count;
           } else {
-            state.imagePokemonList = initialImage;
+              state.list = [];
           }
           state.isLoading = false;
         }
       )
-      .addCase(getContestDetailsAction.rejected, (state: ContestList) => {
+
+
+      .addCase(getContestEffectsAction.rejected, (state: ContestsList) => {
         state.isLoading = false;
-      });
+      }).addCase(getContestEffectsAction.pending, (state: ContestsList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getContestEffectsAction.fulfilled,
+        (state: ContestsList, { payload }) => {
+          if (payload?.data) {
+            state.ContestEffectList = payload?.data;
+            state.total = payload?.count;
+          } else {
+              state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+
+
+      .addCase(getSuperContestEffectsAction.rejected, (state: ContestsList) => {
+        state.isLoading = false;
+      }).addCase(getSuperContestEffectsAction.pending, (state: ContestsList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getSuperContestEffectsAction.fulfilled,
+        (state: ContestsList, { payload }) => {
+          if (payload?.data) {
+            state.SuperContestEffectsList = payload?.data;
+            state.total = payload?.count;
+          } else {
+              state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
   },
 });
 export const ContestReducer = ContestSlice.reducer;
