@@ -1,13 +1,9 @@
 import { Strings } from 'Resource/Strings'
 import React, { FC, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getBerryDetailsAction } from 'redux/BerrySlice/BerryAsyncThunk'
-import { getContestEffectsAction, getContestTypesAction } from 'redux/ContestSlice/ContestAsyncThunk'
-import { getEncounterConditionAction, getEncounterMethodAction } from 'redux/EncounterSlice/EncounterAsyncThunk'
+import { useSelector } from 'react-redux'
 import { getEvolutionTriggersAction } from 'redux/EvolutionSlice/EvolutionAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
-import { idText } from 'typescript'
+
 export interface Props {
     id: number
 }
@@ -34,7 +30,7 @@ return () => {
     },[id])
 
 if(isLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 
 const data = [
@@ -43,18 +39,18 @@ const data = [
         value: EvolutionTriggerList.name
     },
     {
-        label: "values",
+        label: Strings.names,
         value : EvolutionTriggerList.names.map((item)=>item.name)?.join(" ,")
     },
     {
-        label: "names",
+        label: Strings.pokemonSpecies,
         value :EvolutionTriggerList.pokemon_species.map((item)=>item.name)?.join(" ,")
     },
 
 ]
   return (
     <div className='section'>
-        <h2>{Strings.encounterCondition}</h2>
+        <h2>{Strings.evolutionTrigger}</h2>
       {data.map((item) => <DataContent value = {item.value} label = {item.label}/>)}
     </div>
   )

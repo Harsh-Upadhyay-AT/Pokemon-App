@@ -101,7 +101,7 @@ export interface BerryList {
   list: BerrysList[];
   berryList: Berry;
   isLoading: boolean;
-  isFlalvorLoading:boolean;
+  isFlavorLoading:boolean;
   isFirmnessesLoading:boolean;
   id: number;
   limit: number

@@ -33,7 +33,7 @@ return () => {
     },[id])
 
 if(isLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 
 const data = [
@@ -42,11 +42,11 @@ const data = [
         value: EncounterMethodList.name
     },
     {
-        label: "order",
+        label: Strings.order,
         value :EncounterMethodList.order
     },
     {
-        label: "names",
+        label: Strings.names,
         value :EncounterMethodList.names.map((item)=>item.name)?.join(" ,")
     },
 

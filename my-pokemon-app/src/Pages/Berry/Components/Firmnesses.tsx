@@ -1,5 +1,5 @@
 import { Strings } from 'Resource/Strings'
-import React, { FC, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {  getBerryFirmnessesAction } from 'redux/BerrySlice/BerryAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
@@ -26,7 +26,7 @@ if(id) {
     },[id])
 
 if(isFirmnessesLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 const data = [
     {
@@ -36,7 +36,7 @@ const data = [
 ]
   return (
     <div className='section'>
-        <h2>Firemness details</h2>
+        <h2>{Strings.firmnessesDetails}</h2>
       {data.map((item) => <Details value = {item.value} label = {item.label}/>)}
     </div>
   )

@@ -15,20 +15,6 @@ export interface Move {
     stat_changes: MoveStatChange[]
 }
 
-export interface MoveMetaData {
-    min_hits: number;
-    max_hits: number;
-    min_turns: number;
-    max_turns: number;
-    drain: number;
-    healing: number;
-    crit_rate: number;
-    ailment_chance: number;
-    flinch_chance: number;
-    stat_chance: number;
-}
-
-
 export interface MoveDamageClass {
   id: number;
   name: string;
@@ -77,9 +63,10 @@ export interface MoveList {
     limit: number;
     offset: number;
     total: number;
-    ListAilments:MoveAilments
     isLoading: boolean;
     imagePokemonList: ImagePokemon;
+    AilmentsList : ParalysisInfo
+
   }
 
 
@@ -88,15 +75,19 @@ export interface MoveList {
     url: string;
   }
 
-  export interface names {
-    name: string;
-  }
-
-
-  interface MoveAilments  {
+  interface ParalysisInfo {
     id: number;
     name: string;
-    moves: { name: string; url: string }[];
-    names: { name: string; language: { name: string; url: string } }[];
+    moves: {
+      name: string;
+      url: string;
+    }[];
+    names: {
+      name: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
   }
-  
+

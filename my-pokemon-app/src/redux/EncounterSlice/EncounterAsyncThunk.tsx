@@ -68,6 +68,7 @@ export const getEncounterMethodAction = createAsyncThunk(
       try {
         const response = await getEncounterConditions(payload);
         if (response.status === constant.APIResponse.defaultStatusCode) {
+          console.log(response.data,"testing for data")
           return {
             data: response?.data,
           };

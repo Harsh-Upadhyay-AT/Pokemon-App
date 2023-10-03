@@ -1,18 +1,16 @@
 import { Strings } from 'Resource/Strings'
 import React, { FC, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getBerryDetailsAction } from 'redux/BerrySlice/BerryAsyncThunk'
-import { getContestTypesAction, getSuperContestEffectsAction } from 'redux/ContestSlice/ContestAsyncThunk'
+import { useSelector } from 'react-redux'
+import { getSuperContestEffectsAction } from 'redux/ContestSlice/ContestAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
-import { idText } from 'typescript'
+
 export interface Props {
     id: number
 }
 const SuperContestEffects:React.FC<Props> = ({
     id
 }) => {
-   
+
     const dispatch = useAppDispatch()
     const { isLoading, SuperContestEffectsList} = useSelector((state: IRootState) => {
         return state.contestStateData
@@ -32,27 +30,27 @@ return () => {
     },[id])
 
 if(isLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 
 const data = [
     {
-        label: Strings.name,
+        label: Strings.appeal,
         value: SuperContestEffectsList.appeal
     },
     {
-        label: Strings.name,
-        value: SuperContestEffectsList.flavor_text_entries.map((item)=>item.flavor_text)
+        label: Strings.flavorTextEntries,
+        value: SuperContestEffectsList.flavor_text_entries.map((item)=>item.flavor_text)?.join(" , ")
     },
     {
-        label: Strings.name,
-        value: SuperContestEffectsList.moves.map((item)=>item.name)
+        label: Strings.moves,
+        value: SuperContestEffectsList.moves.map((item)=>item.name)?.join(" , ")
     },
 
 ]
   return (
     <div className='section'>
-        <h2>{Strings.generalDetails}</h2>
+        <h2>{Strings.superContestEffects}</h2>
       {data?.map((item) => <DataContent value = {item.value} label = {item.label}/>)}
     </div>
   )

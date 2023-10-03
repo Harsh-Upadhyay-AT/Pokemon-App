@@ -1,24 +1,24 @@
 import { Strings } from 'Resource/Strings'
 import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { getContestEffectsAction } from 'redux/ContestSlice/ContestAsyncThunk'
+import { getEvolutionChainsAction } from 'redux/EvolutionSlice/EvolutionAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
 
 export interface Props {
     id: number
 }
-const ContestEffects:React.FC<Props> = ({
+const EvolutionChains:React.FC<Props> = ({
     id
 }) => {
 
     const dispatch = useAppDispatch()
-    const { isLoading, ContestEffectList} = useSelector((state: IRootState) => {
-        return state.contestStateData
+    const { isLoading, ChainList} = useSelector((state: IRootState) => {
+        return state.evolutionStateData
     })
 
     useEffect(() => {
 if(id) {
-    dispatch(getContestEffectsAction({
+    dispatch(getEvolutionChainsAction({
         id,
     })
     )
@@ -35,26 +35,13 @@ if(isLoading) {
 
 const data = [
     {
-        label: Strings.appeal,
-        value: ContestEffectList.appeal
+        label: "test",
+        value: ChainList.turn_upside_down
     },
-    {
-        label: Strings.jam,
-        value :ContestEffectList.jam
-    },
-    {
-        label: Strings.effectEntries,
-        value :ContestEffectList.effect_entries.map((item)=>item.effect)?.join(" , ")
-    },
-    {
-        label: Strings.flavorTextEntries,
-        value :ContestEffectList.flavor_text_entries.map((item)=>item.flavor_text)?.join(" , ")
-    },
-
 ]
   return (
     <div className='section'>
-        <h2>{Strings.contestEffects}</h2>
+        <h2>{Strings.evolutionChain}</h2>
       {data.map((item) => <DataContent value = {item.value} label = {item.label}/>)}
     </div>
   )
@@ -69,4 +56,4 @@ const DataContent:FC<any> = ({
         <span>: {value}</span>
     </div>
 }
-export default ContestEffects
+export default EvolutionChains

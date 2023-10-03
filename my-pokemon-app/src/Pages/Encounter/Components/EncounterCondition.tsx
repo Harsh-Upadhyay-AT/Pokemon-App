@@ -33,7 +33,7 @@ return () => {
     },[id])
 
 if(isLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 
 const data = [
@@ -42,11 +42,11 @@ const data = [
         value: EncounterConditionList.name
     },
     {
-        label: "values",
+        label: Strings.value,
         value : EncounterConditionList.values.map((item)=>item.name)?.join(" ,")
     },
     {
-        label: "names",
+        label: Strings.names,
         value :EncounterConditionList.names.map((item)=>item.name)?.join(" ,")
     },
 

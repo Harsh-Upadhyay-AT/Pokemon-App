@@ -1,13 +1,9 @@
 import { Strings } from 'Resource/Strings'
 import React, { FC, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getBerryDetailsAction } from 'redux/BerrySlice/BerryAsyncThunk'
-import { getContestEffectsAction, getContestTypesAction } from 'redux/ContestSlice/ContestAsyncThunk'
-import { getEncounterConditionValueAction, getEncounterMethodAction } from 'redux/EncounterSlice/EncounterAsyncThunk'
-import { getMoveAilment } from 'redux/MoveSlice/MoveAsyncThunk'
+import { useSelector } from 'react-redux'
+import { getMoveAilmentAction } from 'redux/MoveSlice/MoveAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
-import { idText } from 'typescript'
+
 export interface Props {
     id: number
 }
@@ -16,13 +12,13 @@ const MoveAilments:React.FC<Props> = ({
 }) => {
 
     const dispatch = useAppDispatch()
-    const { isLoading, ListAilments} = useSelector((state: IRootState) => {
+    const { isLoading, AilmentsList} = useSelector((state: IRootState) => {
         return state.moveStateData
     })
 
     useEffect(() => {
 if(id) {
-    dispatch(getMoveAilment({
+    dispatch(getMoveAilmentAction({
         id,
     })
     )
@@ -34,31 +30,31 @@ return () => {
     },[id])
 
 if(isLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 
 const data = [
     {
         label: Strings.name,
-        value: ListAilments.name
+        value: AilmentsList.name
     },
     {
-        label: "order",
-        value: ListAilments.moves.map((item)=>item.name)?.join(" ,")
+        label: Strings.moves,
+        value: AilmentsList.moves.map((item)=>item.name)?.join(" ,")
     },
     {
-        label: "names",
-        value :ListAilments.names.map((item)=>item.name)?.join(" ,")
+        label: Strings.names,
+        value :AilmentsList.names.map((item)=>item.name)?.join(" ,")
     },
     
 ]
-  return (
+return (
     <div className='section'>
-        <h2>{Strings.encounterConditionValue}</h2>
-      {data.map((item) => <DataContent
-      value = {item.value} 
-      label = {item.label}/>)}
-    </div>
+  <h2>{Strings.moveAilments}</h2>
+  {data.map((item, index) => (
+    <DataContent key={index} value={item.value} label={item.label} />
+  ))}
+</div>
   )
 }
 

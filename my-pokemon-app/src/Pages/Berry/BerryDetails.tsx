@@ -10,7 +10,7 @@ const BerryDetails = () => {
     <div>
 <Berries id = {parseInt(listId as string)}/> 
 <Firmnesses id = {parseInt(listId as string)}/>
-<Flavors id = {parseInt(listId as string)}/>     
+<Flavors id = {parseInt(listId as string)}/>
     </div>
   )
 }

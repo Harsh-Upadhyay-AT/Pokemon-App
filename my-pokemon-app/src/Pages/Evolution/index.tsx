@@ -25,7 +25,7 @@ const Evolution = () => {
   useEffect(() => {
     dispatch(
         getAllEvolutionDetailsAction({
-        id: 0,
+        id:0,
         offset,
         limit,
       })

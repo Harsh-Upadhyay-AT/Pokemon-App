@@ -86,8 +86,33 @@ const initialImage = {
       },
     ],
   };
-  
-  
+
+  const Chain =
+  {
+    "id": 0,
+    "baby_trigger_item": null,
+  }
+
+  const ChainDetails = {
+    item: "",
+    gender: "",
+    held_item: "",
+    known_move: "",
+    known_move_type: "",
+    location: "",
+    min_level: 0,
+    min_happiness: "",
+    min_beauty: "",
+    min_affection: "",
+    needs_overworld_rain: false,
+    party_species: "",
+    party_type: "",
+    relative_physical_stats: "",
+    time_of_day: "",
+    trade_species: "",
+    turn_upside_down: false,
+  };
+
 
 const initialState: EvolutionList = {
   list: [],
@@ -100,8 +125,8 @@ const initialState: EvolutionList = {
   total: constant.offset.defaultTotal,
   name: "",
   background: 0,
-  EvolutionTriggerList:EvolutionTrigger
-
+  EvolutionTriggerList: EvolutionTrigger,
+  ChainList: ChainDetails
 };
 
 const EvolutionSlice = createSlice({
@@ -142,7 +167,8 @@ const EvolutionSlice = createSlice({
         getEvolutionChainsAction.fulfilled,
         (state: EvolutionList, { payload }) => {
           if (payload?.data) {
-            // state.EvolutionChainList = payload?.data;
+            state.ChainList = payload?.data;
+            console.log(payload,"testing data")
             state.total = payload?.count;
           } else {
             state.list = [];

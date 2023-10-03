@@ -1,11 +1,9 @@
 import { Strings } from 'Resource/Strings'
 import React, { FC, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getBerryDetailsAction } from 'redux/BerrySlice/BerryAsyncThunk'
+import { useSelector } from 'react-redux'
 import { getContestTypesAction } from 'redux/ContestSlice/ContestAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
-import { idText } from 'typescript'
+
 export interface Props {
     id: number
 }
@@ -32,7 +30,7 @@ return () => {
     },[id])
 
 if(isLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 
 const data = [
@@ -41,14 +39,14 @@ const data = [
         value: contestsType.name
     },
     {
-        label: "berryFlavor",
+        label: Strings.berryFlavor,
         value :contestsType.berry_flavor.name
     },
 
 ]
   return (
     <div className='section'>
-        <h2>{Strings.generalDetails}</h2>
+        <h2>{Strings.contestType}</h2>
       {data?.map((item) => <DataContent value = {item.value} label = {item.label}/>)}
     </div>
   )

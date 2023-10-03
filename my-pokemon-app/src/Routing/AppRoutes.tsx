@@ -9,7 +9,7 @@ import Evolution from "Pages/Evolution";
 import EvolutionDetails from "Pages/Evolution/EvolutionDetails";
 import Home from "Pages/Home";
 import Move from "Pages/Move";
-// import MoveDetails from "Pages/Move/MoveDetails";
+import MoveDetails from "Pages/Move/MoveDetails";
 import MyPokemonList from "Pages/MyPokemonList";
 import PokemonDetails from "Pages/PokemonDetails";
 import PokemonList from "Pages/PokemonList";
@@ -41,6 +41,8 @@ const AppRoutes = () => {
 
           <Route path="/move/" element={<Move />}/>
           {/* <Route path="/move-ailment/:listId" element={<MoveDetails />}/> */}
+
+          {/* <Route path="move-target/:listId" element={<MoveDetails />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

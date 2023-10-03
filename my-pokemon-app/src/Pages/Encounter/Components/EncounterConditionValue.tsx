@@ -42,11 +42,11 @@ const data = [
         value: EncounterConditionValueList.name
     },
     {
-        label: "order",
+        label: Strings.condition,
         value: EncounterConditionValueList.condition.name
     },
     {
-        label: "names",
+        label: Strings.names,
         value :EncounterConditionValueList.names.map((item)=>item.name)?.join(" ,")
     },
     
@@ -55,7 +55,7 @@ const data = [
     <div className='section'>
         <h2>{Strings.encounterConditionValue}</h2>
       {data.map((item) => <DataContent
-      value = {item.value} 
+      value = {item.value}
       label = {item.label}/>)}
     </div>
   )

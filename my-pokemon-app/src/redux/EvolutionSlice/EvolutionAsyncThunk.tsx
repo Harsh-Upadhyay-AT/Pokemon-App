@@ -41,6 +41,7 @@ export interface GetEvolutionList {
       try {
         const response = await getEvolutionChain(payload);
         if (response.status === constant.APIResponse.defaultStatusCode) {
+          console.log(response,'testsdfasdffasdf')
           return {
             data: response?.data,
           };

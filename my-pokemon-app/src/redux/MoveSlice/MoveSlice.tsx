@@ -1,42 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
 import constant from "config/constant/constant";
-import { getAllMoveDetailsAction, getMoveAilment } from "./MoveAsyncThunk";
-import {  MoveList } from "./MoveType";
+import {
+  getAllMoveDetailsAction,
+  getMoveAilmentAction,
+  getMoveBattleStylesAction,
+  getMoveTargetAction,
+} from "./MoveAsyncThunk";
+import { MoveList } from "./MoveType";
 
 const initialImage = {
-    back_default: "",
-    back_shiny: "",
-    front_default: "",
-    front_shiny: "",
-    name: "",
-    url: "",
-    id: 1,
-    weight: 1,
-    height: 1,
-    order: 1,
-  };
+  back_default: "",
+  back_shiny: "",
+  front_default: "",
+  front_shiny: "",
+  name: "",
+  url: "",
+  id: 1,
+  weight: 1,
+  height: 1,
+  order: 1,
+};
 
-
-  const MoveAilmentsList = {
-    id: 1,
-    name: "",
-    moves: [
-      {
+const MoveAilments = {
+  id: 0,
+  name: "",
+  moves: [
+    {
+      name: "",
+      url: "",
+    },
+  ],
+  names: [
+    {
+      name: "",
+      language: {
         name: "",
         url: "",
       },
-    ],
-    names: [
-      {
-        name: "",
-        language: {
-          name: "",
-          url: "",
-        },
-      },
-    ],
-  };
-
+    },
+  ],
+};
 
 const initialState: MoveList = {
   list: [],
@@ -47,7 +50,7 @@ const initialState: MoveList = {
   total: constant.offset.defaultTotal,
   isLoading: false,
   name: "",
-  ListAilments: MoveAilmentsList
+  AilmentsList: MoveAilments,
 };
 
 const MoveSlice = createSlice({
@@ -76,29 +79,68 @@ const MoveSlice = createSlice({
             state.list = payload?.data;
             state.total = payload?.count;
           } else {
-              state.list = [];
+            state.list = [];
           }
           state.isLoading = false;
         }
       )
-      .addCase(getMoveAilment.pending, (state: MoveList) => {
+
+      .addCase(getMoveAilmentAction.pending, (state: MoveList) => {
         state.isLoading = true;
-       })
+      })
       .addCase(
-        getMoveAilment.fulfilled,
-         (state: MoveList, { payload }) => {
-           if (payload?.data) {
-      state.ListAilments = payload?.data
-      state.total = payload?.count;
-           } else {
-      state.imagePokemonList = initialImage;
+        getMoveAilmentAction.fulfilled,
+        (state: MoveList, { payload }) => {
+          if (payload?.data) {
+            state.AilmentsList = payload?.data;
+            state.total = payload?.count;
+          } else {
+            state.list = [];
           }
           state.isLoading = false;
-         }
-       )
-       .addCase(getMoveAilment.rejected, (state: MoveList) => {
-         state.isLoading = false;
-       });
+        }
+      )
+      .addCase(getMoveAilmentAction.rejected, (state: MoveList) => {
+        state.isLoading = false;
+      })
+
+      .addCase(getMoveBattleStylesAction.rejected, (state: MoveList) => {
+        state.isLoading = false;
+      })
+      .addCase(getMoveBattleStylesAction.pending, (state: MoveList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getMoveBattleStylesAction.fulfilled,
+        (state: MoveList, { payload }) => {
+          if (payload?.data) {
+            // state.EncounterConditionList = payload?.data;
+            state.total = payload?.count;
+          } else {
+            state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+
+      .addCase(getMoveTargetAction.rejected, (state: MoveList) => {
+        state.isLoading = false;
+      })
+      .addCase(getMoveTargetAction.pending, (state: MoveList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getMoveTargetAction.fulfilled,
+        (state: MoveList, { payload }) => {
+          if (payload?.data) {
+            // state.SpecificMoveList = payload?.data;
+            state.total = payload?.count;
+          } else {
+            state.list = [];
+          }
+          state.isLoading = false;
+        }
+      );
   },
 });
 export const MoveReducer = MoveSlice.reducer;
