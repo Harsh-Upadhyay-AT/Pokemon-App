@@ -167,8 +167,6 @@ const EvolutionSlice = createSlice({
         getEvolutionChainsAction.fulfilled,
         (state: EvolutionList, { payload }) => {
           if (payload?.data) {
-            state.ChainList = payload?.data;
-            console.log(payload,"testing data")
             state.total = payload?.count;
           } else {
             state.list = [];

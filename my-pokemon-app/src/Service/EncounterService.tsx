@@ -30,7 +30,6 @@ export async function getAllEncounterDetails(payload: GetEncounterList) {
   export async function getEncounterConditions(payload: GetEncounterConditionsList) {
     try {
       const response = await appClient.get(api.endPoint.encounterConditions + payload.id);
-      console.log(response,"123434")
       return hasSuccess(response?.data);
     } catch (error) {
       return hasError(error);

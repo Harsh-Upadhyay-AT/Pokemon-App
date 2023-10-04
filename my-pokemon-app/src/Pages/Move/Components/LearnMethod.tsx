@@ -1,24 +1,24 @@
 import { Strings } from 'Resource/Strings'
 import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { getMoveAilmentAction } from 'redux/MoveSlice/MoveAsyncThunk'
+import { getMoveLearnMethodsAction } from 'redux/MoveSlice/MoveAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
 
 export interface Props {
     id: number
 }
-const MoveAilments:React.FC<Props> = ({
+const LearnMethod:React.FC<Props> = ({
     id
 }) => {
 
     const dispatch = useAppDispatch()
-    const { isLoading, AilmentsList} = useSelector((state: IRootState) => {
+    const { isLoading, MoveLearnMethods} = useSelector((state: IRootState) => {
         return state.moveStateData
     })
 
     useEffect(() => {
 if(id) {
-    dispatch(getMoveAilmentAction({
+    dispatch(getMoveLearnMethodsAction({
         id,
     })
     )
@@ -32,21 +32,25 @@ if(isLoading) {
 const data = [
     {
         label: Strings.name,
-        value: AilmentsList.name
-    },
-    {
-        label: Strings.moves,
-        value: AilmentsList.moves.map((item)=>item.name)?.join(" ,")
+        value: MoveLearnMethods.name
     },
     {
         label: Strings.names,
-        value :AilmentsList.names.map((item)=>item.name)?.join(" ,")
+        value :MoveLearnMethods.names.map((item)=>item.name)?.join(" ,")
+    },
+    {
+        label: Strings.versionGroups,
+        value :MoveLearnMethods.version_groups.map((item)=>item.name)?.join(" ,")
+    },
+    {
+        label: Strings.description,
+        value :MoveLearnMethods.descriptions.map((item)=>item.description)?.join(" ,")
     },
     
 ]
 return (
     <div className='section'>
-  <h2>{Strings.moveAilments}</h2>
+  <h2>{Strings.learnMethod}</h2>
   {data.map((item, index) => (
     <DataContent key={index} value={item.value} label={item.label} />
   ))}
@@ -63,4 +67,4 @@ const DataContent:FC<any> = ({
         <span>: {value}</span>
     </div>
 }
-export default MoveAilments
+export default LearnMethod

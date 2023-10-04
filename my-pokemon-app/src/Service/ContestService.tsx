@@ -23,7 +23,6 @@ export async function getAllContestDetails(payload: GetContestList) {
   export async function getContestTypes (payload: GetContestTypes) {
     try {
       const response = await appClient.get(api.endPoint.contestType + payload.id);
-      console.log(response,"test")
       return hasSuccess(response?.data);
     } catch (error) {
       return hasError(error);

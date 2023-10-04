@@ -5,19 +5,19 @@ import { GetImageList } from "redux/PokemonSlice/PokemonAsyncThunk";
 import { GetEvolutionChain, GetEvolutionList, GetEvolutionTriggers } from "redux/EvolutionSlice/EvolutionAsyncThunk";
 
 export async function getAllEvolutionDetails(payload: GetEvolutionList) {
-    try {
-      const response = await appClient.get(
-        api.endPoint.evolutionChain +
-          "?offset=" +
-          payload.offset +
-          "&limit=" +
-          payload.limit
-      );
-      return hasSuccess(response?.data);
-    } catch (error) {
-      return hasError(error);
-    }
+  try {
+    const response = await appClient.get(
+      api.endPoint.evolutionChain +
+        "?offset=" +
+        payload.offset +
+        "&limit=" +
+        payload.limit
+    );
+    return hasSuccess(response?.data);
+  } catch (error) {
+    return hasError(error);
   }
+}
 
   export async function getEvolutionChain (payload: GetEvolutionChain) {
     try {

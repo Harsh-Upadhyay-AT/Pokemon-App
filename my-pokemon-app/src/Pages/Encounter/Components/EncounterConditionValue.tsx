@@ -26,10 +26,6 @@ if(id) {
     })
     )
 }
-return () => {
-  //Reset the current berryList state when components unmouted
-    console.log("components unmounted")
-}
     },[id])
 
 if(isLoading) {

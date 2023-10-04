@@ -12,7 +12,7 @@ const MoveTarget:React.FC<Props> = ({
 }) => {
 
     const dispatch = useAppDispatch()
-    const { isLoading} = useSelector((state: IRootState) => {
+    const { isLoading, MoveTargetsList} = useSelector((state: IRootState) => {
         return state.moveStateData
     })
 
@@ -23,35 +23,35 @@ if(id) {
     })
     )
 }
-return () => {
-
-    console.log("components unmounted")
-}
     },[id])
 
 if(isLoading) {
-    return <div>Loadig...</div>
+    return <div>{Strings.loading}</div>
 }
 
 const data = [
     {
         label: Strings.name,
-        // value: SpecificMoveList.name
+         value: MoveTargetsList.name
     },
-    // {
-    //     label: "values",
-    //     value : SpecificMoveList.descriptions.map((item)=>item.description)?.join(" ,")
-    // },
-    // {
-    //     label: "names",
-    //     value :SpecificMoveList.names.map((item)=>item.name)?.join(" ,")
-    // },
+    {
+        label: Strings.moves,
+         value: MoveTargetsList.moves.map((item)=>item.name)?.join(" ,")
+    },
+     {
+         label: Strings.description,
+         value : MoveTargetsList.descriptions.map((item)=>item.description)?.join(" ,")
+     },
+     {
+         label: Strings.names,
+         value :MoveTargetsList.names.map((item)=>item.name)?.join(" ,")
+    },
 
 ]
   return (
     <div className='section'>
-        <h2>{Strings.name}</h2>
-      {/* {data.map((item) => <DataContent value = {item.value} label = {item.label}/>)} */}
+        <h2>{Strings.target}</h2>
+      {data.map((item) => <DataContent value = {item.value} label = {item.label}/>)}
     </div>
   )
 }

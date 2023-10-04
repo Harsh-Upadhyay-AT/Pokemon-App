@@ -39,10 +39,15 @@ const AppRoutes = () => {
           <Route path="/evolution-chain/:listId" element={<EvolutionDetails />}/>
           <Route path="/evolution-trigger/:listId" element={<EvolutionDetails />}/>
 
-          <Route path="/move/" element={<Move />}/>
-          {/* <Route path="/move-ailment/:listId" element={<MoveDetails />}/> */}
+          <Route path="/move" element={<Move />}/>
+          <Route path = "/move/:listId" element ={<MoveDetails/>}/>
+          <Route path="/move-ailment/:listId" element={<MoveDetails />}/>
 
-          {/* <Route path="move-target/:listId" element={<MoveDetails />} /> */}
+          <Route path="move-target/:listId" element={<MoveDetails />} />
+          <Route path="/move-battle-style/:listId" element={<MoveDetails />}/>
+          <Route path="/move-category/:listId" element={<MoveDetails />}/>
+          <Route path="/move-damage-class/:listId" element={<MoveDetails />}/>
+          <Route path="/move-learn-method/:listId" element={<MoveDetails />}/>
         </Route>
       </Routes>
     </BrowserRouter>

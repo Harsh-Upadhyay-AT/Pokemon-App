@@ -30,7 +30,6 @@ export async function getAllBerryDetails(payload: GetBerryList) {
   export async function getBerryFirmnesses (payload: GetBerryFirmnessesList) {
     try {
       const response = await appClient.get(api.endPoint.berryFirmness + payload.id);
-      console.log(response,"test")
       return hasSuccess(response?.data);
     } catch (error) {
       return hasError(error);
@@ -40,7 +39,6 @@ export async function getAllBerryDetails(payload: GetBerryList) {
   export async function getBerryFlavors  (payload: GetBerryFlavors) {
     try {
       const response = await appClient.get(api.endPoint.berryFlavor + payload.id);
-      console.log(response,"testsdfa")
       return hasSuccess(response?.data);
     } catch (error) {
       return hasError(error);

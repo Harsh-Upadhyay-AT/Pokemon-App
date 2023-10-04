@@ -1,24 +1,24 @@
 import { Strings } from 'Resource/Strings'
 import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { getMoveAilmentAction } from 'redux/MoveSlice/MoveAsyncThunk'
+import { getMoveDamageClassesAction } from 'redux/MoveSlice/MoveAsyncThunk'
 import { IRootState, useAppDispatch } from 'redux/store'
 
 export interface Props {
     id: number
 }
-const MoveAilments:React.FC<Props> = ({
+const DamageClass:React.FC<Props> = ({
     id
 }) => {
 
     const dispatch = useAppDispatch()
-    const { isLoading, AilmentsList} = useSelector((state: IRootState) => {
+    const { isLoading, DamageClassList} = useSelector((state: IRootState) => {
         return state.moveStateData
     })
 
     useEffect(() => {
 if(id) {
-    dispatch(getMoveAilmentAction({
+    dispatch(getMoveDamageClassesAction({
         id,
     })
     )
@@ -32,21 +32,21 @@ if(isLoading) {
 const data = [
     {
         label: Strings.name,
-        value: AilmentsList.name
+        value: DamageClassList.name
     },
     {
         label: Strings.moves,
-        value: AilmentsList.moves.map((item)=>item.name)?.join(" ,")
+        value: DamageClassList.moves.map((item)=>item.name)?.join(" ,")
     },
     {
-        label: Strings.names,
-        value :AilmentsList.names.map((item)=>item.name)?.join(" ,")
+        label: Strings.description,
+        value :DamageClassList.descriptions.map((item)=>item.description)?.join(" ,")
     },
     
 ]
 return (
     <div className='section'>
-  <h2>{Strings.moveAilments}</h2>
+  <h2>{Strings.damageClass}</h2>
   {data.map((item, index) => (
     <DataContent key={index} value={item.value} label={item.label} />
   ))}
@@ -63,4 +63,4 @@ const DataContent:FC<any> = ({
         <span>: {value}</span>
     </div>
 }
-export default MoveAilments
+export default DamageClass

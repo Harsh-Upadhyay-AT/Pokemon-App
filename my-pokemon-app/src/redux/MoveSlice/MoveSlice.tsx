@@ -4,6 +4,9 @@ import {
   getAllMoveDetailsAction,
   getMoveAilmentAction,
   getMoveBattleStylesAction,
+  getMoveCategoriesAction,
+  getMoveDamageClassesAction,
+  getMoveLearnMethodsAction,
   getMoveTargetAction,
 } from "./MoveAsyncThunk";
 import { MoveList } from "./MoveType";
@@ -41,6 +44,125 @@ const MoveAilments = {
   ],
 };
 
+const attackMove = {
+  id: 0,
+  name: "",
+  names: [
+    {
+      name: "",
+      language: {
+        name: "en",
+        url: "https://pokeapi.co/api/v2/language/9/"
+      }
+    }
+  ]
+};
+
+
+
+const CategoriesMove  = {
+  id: 0,
+  name: "",
+  descriptions: [
+    {
+      description: "",
+      language: {
+        name: "",
+        url: ""
+      }
+    }
+  ],
+  moves: [
+    {
+      name: "",
+      url: ""
+    }
+  ]
+};
+
+
+const MoveDamageClass = {
+  id: 0,
+  name: "",
+  descriptions: [
+    {
+      description: "",
+      language: {
+        name: "",
+        url: ""
+      }
+    }
+  ],
+  moves: [
+    {
+      name: "",
+      url: ""
+    }
+  ]
+};
+
+
+const levelMethod = {
+  id: 0,
+  name: "",
+  names: [
+    {
+      name: "",
+      language: {
+        name: "",
+        url: ""
+      }
+    }
+  ],
+  descriptions: [
+    {
+      description: "",
+      language: {
+        name: "",
+        url: ""
+      }
+    }
+  ],
+  version_groups: [
+    {
+      name: "",
+      url: ""
+    }
+  ]
+};
+
+
+
+const MoveTargetsItem = {
+  id: 0,
+  name: "",
+  descriptions: [
+    {
+      description: "",
+      language: {
+        name: "",
+        url: ""
+      }
+    }
+  ],
+  moves: [
+    {
+      name: "",
+      url: ""
+    }
+  ],
+  names: [
+    {
+      name: "",
+      language: {
+        name: "",
+        url: ""
+      }
+    }
+  ]
+};
+
+
 const initialState: MoveList = {
   list: [],
   id: 1,
@@ -50,7 +172,12 @@ const initialState: MoveList = {
   total: constant.offset.defaultTotal,
   isLoading: false,
   name: "",
+  battleStyle: attackMove,
   AilmentsList: MoveAilments,
+  CategoriesList: CategoriesMove,
+  DamageClassList: MoveDamageClass,
+  MoveLearnMethods: levelMethod,
+  MoveTargetsList: MoveTargetsItem
 };
 
 const MoveSlice = createSlice({
@@ -114,7 +241,7 @@ const MoveSlice = createSlice({
         getMoveBattleStylesAction.fulfilled,
         (state: MoveList, { payload }) => {
           if (payload?.data) {
-            // state.EncounterConditionList = payload?.data;
+            state.battleStyle = payload?.data;
             state.total = payload?.count;
           } else {
             state.list = [];
@@ -122,6 +249,66 @@ const MoveSlice = createSlice({
           state.isLoading = false;
         }
       )
+
+
+      .addCase(getMoveCategoriesAction.rejected, (state: MoveList) => {
+        state.isLoading = false;
+      })
+      .addCase(getMoveCategoriesAction.pending, (state: MoveList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getMoveCategoriesAction.fulfilled,
+        (state: MoveList, { payload }) => {
+          if (payload?.data) {
+            state.CategoriesList = payload?.data;
+            state.total = payload?.count;
+          } else {
+            state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+
+      .addCase(getMoveDamageClassesAction.rejected, (state: MoveList) => {
+        state.isLoading = false;
+      })
+      .addCase(getMoveDamageClassesAction.pending, (state: MoveList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getMoveDamageClassesAction.fulfilled,
+        (state: MoveList, { payload }) => {
+          if (payload?.data) {
+            state.DamageClassList = payload?.data;
+            state.total = payload?.count;
+          } else {
+            state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+
+
+      .addCase(getMoveLearnMethodsAction.rejected, (state: MoveList) => {
+        state.isLoading = false;
+      })
+      .addCase(getMoveLearnMethodsAction.pending, (state: MoveList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getMoveLearnMethodsAction.fulfilled,
+        (state: MoveList, { payload }) => {
+          if (payload?.data) {
+            state.MoveLearnMethods = payload?.data;
+            state.total = payload?.count;
+          } else {
+            state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+
 
       .addCase(getMoveTargetAction.rejected, (state: MoveList) => {
         state.isLoading = false;
@@ -133,7 +320,7 @@ const MoveSlice = createSlice({
         getMoveTargetAction.fulfilled,
         (state: MoveList, { payload }) => {
           if (payload?.data) {
-            // state.SpecificMoveList = payload?.data;
+            state.MoveTargetsList = payload?.data;
             state.total = payload?.count;
           } else {
             state.list = [];
