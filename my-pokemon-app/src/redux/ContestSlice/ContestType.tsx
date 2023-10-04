@@ -1,4 +1,4 @@
-export interface Contest {
+export interface ContestList {
     id: number;
     name: string;
     appeal: number;
@@ -18,9 +18,12 @@ export interface ImagePokemon {
     id: number;
   }
 
-export interface ContestList {
-    list:Contest[]
+export interface ContestsList {
+    list:ContestList[]
     id: number
+    contestsType: ContestTypes
+    ContestEffectList:ContestEffect
+    SuperContestEffectsList:SuperContestEffects
     name: string
     limit: number;
     offset: number;
@@ -48,3 +51,61 @@ export interface ContestList {
   export interface names {
     name: string;
   }
+
+
+
+ export interface ContestTypes {
+    id: number;
+    name: string;
+    berry_flavor: {
+      name: string;
+      url: string;
+    };
+    names: {
+      name: string;
+      color: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }
+
+  
+  interface ContestEffect {
+    id: number;
+    appeal: number;
+    jam: number;
+    effect_entries: {
+      effect: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+    flavor_text_entries: {
+      flavor_text: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }
+  
+
+  interface SuperContestEffects {
+    id: number;
+    appeal: number;
+    flavor_text_entries: {
+      flavor_text: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+    moves: {
+      name: string;
+      url: string;
+    }[];
+  }
+  

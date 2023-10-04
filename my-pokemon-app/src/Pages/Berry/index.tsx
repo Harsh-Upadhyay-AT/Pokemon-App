@@ -7,6 +7,8 @@ import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
 import { getAllBerryDetailsAction } from "redux/BerrySlice/BerryAsyncThunk";
 import { BerryAction } from "redux/BerrySlice/BerrySlice";
+import { Link } from "react-router-dom";
+import { Strings } from "Resource/Strings";
 
 const BerriesList = () => {
   const dispatch = useAppDispatch();
@@ -16,11 +18,14 @@ const BerriesList = () => {
   const { list, id, offset, total, limit } = useSelector(
     (state: IRootState) => state.berryStateData
   );
-
+  list.map((item, index) => {
+    const dynamicId = item?.url?.split("/berry/");
+    return dynamicId;
+  });
   useEffect(() => {
     dispatch(
       getAllBerryDetailsAction({
-        id: 0,
+        id,
         offset,
         limit,
       })
@@ -61,16 +66,21 @@ const BerriesList = () => {
               const backgroundColor = getRandomColor();
               const fontColor = getRandomColor();
               const capitalizedText = item?.name?.toUpperCase();
+              const berryIndex = item?.url?.split("/berry/");
               const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=${capitalizedText}`;
               const itemStyle = {
                 background: backgroundColor,
                 color: fontColor,
               };
-
               return (
                 <div className="list-item" key={index} style={itemStyle}>
                   <img src={imageUrl}  />
                   <div>{capitalizedText}</div>
+                  <div>
+                <Link to={`/berry/${berryIndex?.[1]?.replace("/", "")}`}>
+                <button>{Strings.viewDetail}</button>
+                </Link>
+              </div>
                 </div>
               );
             })}

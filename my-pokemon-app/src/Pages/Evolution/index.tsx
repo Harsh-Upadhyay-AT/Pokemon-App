@@ -7,6 +7,8 @@ import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
 import { getAllEvolutionDetailsAction } from "redux/EvolutionSlice/EvolutionAsyncThunk";
 import { EncounterAction } from "redux/EncounterSlice/EncounterSlice";
+import { Strings } from "Resource/Strings";
+import { Link } from "react-router-dom";
 
 const Evolution = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +25,7 @@ const Evolution = () => {
   useEffect(() => {
     dispatch(
         getAllEvolutionDetailsAction({
-        id: 0,
+        id:0,
         offset,
         limit,
       })
@@ -61,6 +63,7 @@ const Evolution = () => {
             {list.map((item, index) => {
               const backgroundColor = getRandomColor();
               const fontColor = getRandomColor();
+              const EvolutionChain = item?.url?.split("/evolution-chain/");
               const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=Pokemon`;
               const itemStyle = {
                 background: backgroundColor,
@@ -70,6 +73,9 @@ const Evolution = () => {
               return (
                 <div className="list-item" key={index} style={itemStyle}>
                   <img src={imageUrl} />
+                  <Link to={`/evolution-chain/${EvolutionChain?.[1]?.replace("/", "")}`}>
+                  <button>{Strings.viewDetail}</button>
+                  </Link>
                 </div>
               );
             })}

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import constant from "config/constant/constant";
-import { getAllEvolutionDetailsAction, getEvolutionDetailsAction } from "./EvolutionAsyncThunk";
+import { getAllEvolutionDetailsAction, getEvolutionChainsAction, getEvolutionTriggersAction } from "./EvolutionAsyncThunk";
 import { getAllBerryDetailsAction } from "redux/BerrySlice/BerryAsyncThunk";
 import { EvolutionList } from "./EvolutionType";
 
@@ -18,6 +18,102 @@ const initialImage = {
     order: 1,
   };
 
+
+  const EvolutionChain = {
+    id: 0,
+    baby_trigger_item: null,
+    chain: {
+      is_baby: false,
+      species: {
+        name: "",
+        url: "",
+      },
+      evolution_details: null,
+      evolves_to: [
+        {
+          is_baby: false,
+          species: {
+            name: "",
+            url: "",
+          },
+          evolution_details: [
+            {
+              item: null,
+              trigger: {
+                name: "",
+                url: "",
+              },
+              gender: null,
+              held_item: null,
+              known_move: null,
+              known_move_type: null,
+              location: null,
+              min_level: 0,
+              min_happiness: null,
+              min_beauty: null,
+              min_affection: null,
+              needs_overworld_rain: false,
+              party_species: null,
+              party_type: null,
+              relative_physical_stats: null,
+              time_of_day: "",
+              trade_species: null,
+              turn_upside_down: false,
+            },
+          ],
+          evolves_to: [],
+        },
+      ],
+    },
+  };
+
+  const EvolutionTrigger={
+    id: 0,
+    name: "",
+    names: [
+      {
+        name: "",
+        language: {
+          name: "",
+          url: "",
+        },
+      },
+    ],
+    pokemon_species: [
+      {
+        name: "",
+        url: "",
+      },
+    ],
+  };
+
+  const Chain =
+  {
+    "id": 0,
+    "baby_trigger_item": null,
+  }
+
+  const ChainDetails = {
+    item: "",
+    gender: "",
+    held_item: "",
+    known_move: "",
+    known_move_type: "",
+    location: "",
+    min_level: 0,
+    min_happiness: "",
+    min_beauty: "",
+    min_affection: "",
+    needs_overworld_rain: false,
+    party_species: "",
+    party_type: "",
+    relative_physical_stats: "",
+    time_of_day: "",
+    trade_species: "",
+    turn_upside_down: false,
+  };
+
+
 const initialState: EvolutionList = {
   list: [],
   isLoading: false,
@@ -28,7 +124,9 @@ const initialState: EvolutionList = {
   limit: constant.offset.size,
   total: constant.offset.defaultTotal,
   name: "",
-  background: 0
+  background: 0,
+  EvolutionTriggerList: EvolutionTrigger,
+  ChainList: ChainDetails
 };
 
 const EvolutionSlice = createSlice({
@@ -51,7 +149,7 @@ const EvolutionSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(
-        getAllBerryDetailsAction.fulfilled,
+        getAllEvolutionDetailsAction.fulfilled,
         (state: EvolutionList, { payload }) => {
           if (payload) {
             state.list = payload?.data;
@@ -62,31 +160,42 @@ const EvolutionSlice = createSlice({
           state.isLoading = false;
         }
       )
-      .addCase(getEvolutionDetailsAction.pending, (state: EvolutionList) => {
+      .addCase(getEvolutionChainsAction.pending, (state: EvolutionList) => {
         state.isLoading = true;
       })
       .addCase(
-        getEvolutionDetailsAction.fulfilled,
+        getEvolutionChainsAction.fulfilled,
         (state: EvolutionList, { payload }) => {
-          if (payload) {
-            const { data, spec, name, weight, height, order } = payload;
-            state.imagePokemonList = {
-              ...data,
-              ...spec,
-              weight,
-              height,
-              name,
-              order,
-            };
+          if (payload?.data) {
+            state.total = payload?.count;
           } else {
-            state.imagePokemonList = initialImage;
+            state.list = [];
           }
           state.isLoading = false;
         }
       )
-      .addCase(getEvolutionDetailsAction.rejected, (state: EvolutionList) => {
+      .addCase(getEvolutionChainsAction.rejected, (state: EvolutionList) => {
         state.isLoading = false;
-      });
+      })
+
+
+      .addCase(getEvolutionTriggersAction.rejected, (state: EvolutionList) => {
+        state.isLoading = false;
+      }).addCase(getEvolutionTriggersAction.pending, (state: EvolutionList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getEvolutionTriggersAction.fulfilled,
+        (state: EvolutionList, { payload }) => {
+          if (payload?.data) {
+            state.EvolutionTriggerList = payload?.data;
+            state.total = payload?.count;
+          } else {
+              state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
   },
 });
 export const EvolutionReducer = EvolutionSlice.reducer;

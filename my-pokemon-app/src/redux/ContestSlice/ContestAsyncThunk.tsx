@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllContestDetails, getContestDetails } from "Service/ContestService";
+import { getAllContestDetails, getContestEffects, getContestTypes, getSuperContestEffects } from "Service/ContestService";
 import constant from "config/constant/constant";
 
 export interface GetContestList {
@@ -9,7 +9,21 @@ export interface GetContestList {
 }
 
 export interface GetImageList {
+    url:number
     id: number;
+}
+
+export interface GetContestTypes {
+  id: number;
+}
+
+
+export interface GetContestEffects {
+  id: number;
+}
+
+export interface GetSuperContestEffects {
+  id: number;
 }
 
 export const getAllContestDetailsAction = createAsyncThunk(
@@ -31,16 +45,14 @@ export const getAllContestDetailsAction = createAsyncThunk(
     }
 );
 
-export const getContestDetailsAction = createAsyncThunk(
-    "berryDetails/getContestDetailsAction",
-    async (payload: GetImageList, { dispatch, getState }) => {
+export const getContestTypesAction = createAsyncThunk(
+    "Contest/getContestTypesAction",
+    async (payload: GetContestTypes, { dispatch, getState }) => {
       try {
-        const response = await getContestDetails(payload);
+        const response = await getContestTypes(payload);
         if (response.status === constant.APIResponse.defaultStatusCode) {
           return {
             data: response?.data,
-            spec: response?.data?.species,
-            name: response?.data?.name,
           };
         } else if (response.status === constant.APIResponse.errorStatusCode) {
           return response?.data?.message;
@@ -51,3 +63,42 @@ export const getContestDetailsAction = createAsyncThunk(
     }
   );
   
+  
+export const getContestEffectsAction = createAsyncThunk(
+  "Contest/getContestEffectsAction",
+  async (payload: GetContestEffects, { dispatch, getState }) => {
+    try {
+      const response = await getContestEffects(payload);
+      if (response.status === constant.APIResponse.defaultStatusCode) {
+        return {
+          data: response?.data,
+        };
+      } else if (response.status === constant.APIResponse.errorStatusCode) {
+        return response?.data?.message;
+      }
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+
+export const getSuperContestEffectsAction = createAsyncThunk(
+  "Contest/getSuperContestEffectsAction",
+  async (payload: GetSuperContestEffects, { dispatch, getState }) => {
+    try {
+      const response = await getSuperContestEffects(payload);
+      if (response.status === constant.APIResponse.defaultStatusCode) {
+        return {
+          data: response?.data,
+        };
+      } else if (response.status === constant.APIResponse.errorStatusCode) {
+        return response?.data?.message;
+      }
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+

@@ -7,6 +7,8 @@ import constant from "config/constant/constant";
 import { Loader } from "Components/Loader";
 import { getAllMoveDetailsAction } from "redux/MoveSlice/MoveAsyncThunk";
 import { MoveAction } from "redux/MoveSlice/MoveSlice";
+import { Strings } from "Resource/Strings";
+import { Link } from "react-router-dom";
 
 
 const Move = () => {
@@ -63,6 +65,7 @@ const Move = () => {
               const backgroundColor = getRandomColor();
               const fontColor = getRandomColor();
               const capitalizedText = item?.name?.toUpperCase();
+              const MoveIndex = item?.url?.split("/move/");
               const imageUrl = `https://placehold.co/600x400/${item.background}/${item.fontColor}?text=${capitalizedText}`;
               const itemStyle = {
                 background: backgroundColor,
@@ -72,6 +75,9 @@ const Move = () => {
                 <div className="list-item" key={index} style={itemStyle}>
                   <img src={imageUrl} />
                   <div>{capitalizedText}</div>
+                  <Link to={`/move/${MoveIndex?.[1]?.replace("/", "")}`}>
+                  <button>{Strings.viewDetail}</button>
+                  </Link>
                 </div>
               );
             })}

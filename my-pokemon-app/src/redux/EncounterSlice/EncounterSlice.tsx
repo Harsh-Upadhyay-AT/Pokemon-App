@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import constant from "config/constant/constant";
-import { getAllEncounterDetailsAction, getEncounterDetailsAction } from "./EncounterAsyncThunk";
+import { getAllEncounterDetailsAction, getEncounterConditionAction, getEncounterConditionValueAction, getEncounterMethodAction } from "./EncounterAsyncThunk";
 import { EncounterList } from "./EncounterType";
 
 
@@ -17,9 +17,67 @@ const initialImage = {
     order: 1,
   };
 
+  const EncounterMethods = {
+    id: 0,
+    name: "",
+    order: 0,
+    names: [
+      {
+        name: "",
+        language: {
+          name: "",
+          url: "",
+        },
+      },
+    ],
+  };
+
+
+  const EncounterCondition = {
+    id: 0,
+    name: "",
+    values: [
+      {
+        name: "",
+        url: "",
+      },
+    ],
+    names: [
+      {
+        name: "",
+        language: {
+          name: "",
+          url: "",
+        },
+      },
+    ],
+  };
+
+
+  const EncounterConditionValue = {
+    id: 0,
+    name: "",
+    condition: {
+      name: "",
+      url: "",
+    },
+    names: [
+      {
+        name: "",
+        language: {
+          name: "",
+          url: "",
+        },
+      },
+    ],
+  };
+
 const initialState: EncounterList = {
     list: [],
     id: 1,
+    EncounterMethodList:EncounterMethods,
+    EncounterConditionList:EncounterCondition,
+    EncounterConditionValueList:EncounterConditionValue,
     imagePokemonList: initialImage,
     offset: constant.offset.defaultNumber,
     limit: constant.offset.size,
@@ -59,31 +117,61 @@ const EncounterSlice = createSlice({
           state.isLoading = false;
         }
       )
-      .addCase(getEncounterDetailsAction.pending, (state: EncounterList) => {
+      .addCase(getEncounterMethodAction.pending, (state: EncounterList) => {
         state.isLoading = true;
       })
       .addCase(
-        getEncounterDetailsAction.fulfilled,
+        getEncounterMethodAction.fulfilled,
         (state: EncounterList, { payload }) => {
-          if (payload) {
-            const { data, spec, name, weight, height, order } = payload;
-            state.imagePokemonList = {
-              ...data,
-              ...spec,
-              weight,
-              height,
-              name,
-              order,
-            };
+          if (payload?.data) {
+            state.EncounterMethodList = payload?.data;
+            state.total = payload?.count;
           } else {
-            state.imagePokemonList = initialImage;
+            state.list = [];
           }
           state.isLoading = false;
         }
       )
-      .addCase(getEncounterDetailsAction.rejected, (state: EncounterList) => {
+      .addCase(getEncounterMethodAction.rejected, (state: EncounterList) => {
         state.isLoading = false;
-      });
+      })
+
+      .addCase(getEncounterConditionAction.rejected, (state: EncounterList) => {
+        state.isLoading = false;
+      }).addCase(getEncounterConditionAction.pending, (state: EncounterList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getEncounterConditionAction.fulfilled,
+        (state: EncounterList, { payload }) => {
+          if (payload?.data) {
+            state.EncounterConditionList = payload?.data;
+            state.total = payload?.count;
+          } else {
+              state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
+
+
+      .addCase(getEncounterConditionValueAction.rejected, (state: EncounterList) => {
+        state.isLoading = false;
+      }).addCase(getEncounterConditionValueAction.pending, (state: EncounterList) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getEncounterConditionValueAction.fulfilled,
+        (state: EncounterList, { payload }) => {
+          if (payload?.data) {
+            state.EncounterConditionValueList = payload?.data;
+            state.total = payload?.count;
+          } else {
+              state.list = [];
+          }
+          state.isLoading = false;
+        }
+      )
   },
 });
 export const EncounterReducer = EncounterSlice.reducer;

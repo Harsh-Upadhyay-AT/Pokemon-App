@@ -30,6 +30,8 @@ export interface EvolutionList {
     isLoading: boolean;
     imagePokemonList: ImagePokemon;
     background:number;
+    EvolutionTriggerList:EvolutionTrigger
+    ChainList:EvolutionDetails
   }
 
 
@@ -42,4 +44,49 @@ export interface EvolutionList {
     name: string;
   }
 
- 
+
+  interface EvolutionTrigger {
+    id: number;
+    name: string;
+    names: {
+      name: string;
+      language: Language;
+    }[];
+    pokemon_species: PokemonSpecies[];
+  }
+
+
+  interface PokemonChain {
+    id: number;
+    baby_trigger_item: null;
+
+  }
+
+
+
+  interface PokemonSpecies {
+    name: string;
+    url: string;
+  }
+  
+  interface EvolutionDetails {
+    item: null | string;
+    gender: null | string;
+    held_item: null | string;
+    known_move: null | string;
+    known_move_type: null | string;
+    location: null | string;
+    min_level: number;
+    min_happiness: null | string;
+    min_beauty: null | string;
+    min_affection: null | string;
+    needs_overworld_rain: boolean;
+    party_species: null | string;
+    party_type: null | string;
+    relative_physical_stats: null | string;
+    time_of_day: string;
+    trade_species: null | string;
+    turn_upside_down: boolean;
+  }
+
+
