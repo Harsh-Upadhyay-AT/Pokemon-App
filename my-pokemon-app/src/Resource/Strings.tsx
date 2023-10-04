@@ -27,7 +27,7 @@ export const Strings ={
     contestType:"ContestType",
     maxHarvest:"Max harvest",
     smoothness:"Smoothness",
-    berryFlavor:"berry_flavor",
+    berryFlavor:"berryFlavor",
     soilDryness:"Soil dryness",
     naturalGiftPower:"Natural gift power",
     naturalGiftPowerType:"Natural gift power type",
